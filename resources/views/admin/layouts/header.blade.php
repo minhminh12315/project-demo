@@ -1,12 +1,19 @@
-<header>
-    <nav>
-        <!-- <ul>
-            
-            <li><a class="nav-link" href="#home">Home</a></li>
-            @if($type)
-            <li><a class="nav-link" href="{{'logout'}}">Logout</a></li>
-            @endif
-        </ul> -->
-        <div>Here is the admin page</div>
-    </nav>
-</header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{asset('assets/css/admin/index.css')}}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <div>Here is the admin page</div>
+            </nav>
+        </header>

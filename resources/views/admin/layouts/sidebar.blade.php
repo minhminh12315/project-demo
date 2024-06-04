@@ -4,10 +4,10 @@
     </logo>
     <user class="d-flex">
         <img src="{{asset('assets/image/anhDepTrai.jpg')}}" alt="avatar">
-        <div>Minggg</div>
+        <div>{{$name}}</div>
     </user>
     <ul>
         <li><a href="#">Product</a></li>
-        <li><a href="#">Add new</a></li>
+        <li><a href="{{ route('addnew')}}">Add new</a></li>
     </ul>
 </sidebar>

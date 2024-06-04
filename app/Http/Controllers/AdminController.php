@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,9 @@ class AdminController extends Controller
         $data = [
             'lstPrd' => Product::all(),
             "type" => true,
+            'name' => auth()->user()->name
         ];
+        
         return view('admin.index', $data);
     }
     public function login()
@@ -68,4 +71,13 @@ class AdminController extends Controller
     public function admin() {
         return view('admin.index');
     }
+
+    public function addnew() {
+        $data = [
+            'lstCat' => Category::all(),
+            "type" => true,
+            'name' => auth()->user()->name
+        ];
+        return view('admin.layouts.addnew', $data);
+    }    
 }
