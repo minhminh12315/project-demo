@@ -11,7 +11,7 @@
 
 <body>
     <div class="container mt-5">
-        <h2>Login Form</h2>
+        <h2>Login</h2>
         <form action="" method="post">
             @csrf
 
