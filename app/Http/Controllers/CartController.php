@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,12 @@ class CartController extends Controller
         $user = Auth::user();
 
         $order = Order::firstOrCreate(
-            ['user_id' => $user->id, 'status' => 'cart', 'total' => 0]
+            ['user_id' => $user->id, 'total' => 0]
         );
         
         $orderDetail = OrderDetail::updateOrCreate(
             ['order_id' => $order->id, 'product_id' => $request->product_id],
-            ['price' => $request->product_price,'quantity' => DB::raw('quantity + 1')],
+            ['price' => Product::find($request->product_id)->price,'quantity' => DB::raw('quantity + 1')],
         );
 
         $orderDetail->price = $request->product_price * $orderDetail->quantity;
@@ -38,7 +39,7 @@ class CartController extends Controller
     {
         $user = Auth::user();
 
-        $order = Order::where('user_id', $user->id)->where('status', 'cart')->first();
+        $order = Order::where('user_id', $user->id)->first();
         $itemCount = $order ? $order->orderDetails()->sum('quantity') : 0;
 
         return response()->json(['item_count' => $itemCount]);

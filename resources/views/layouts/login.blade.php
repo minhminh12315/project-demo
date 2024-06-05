@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 login-form">
         <h2>Login</h2>
         <form action="" method="post">
             @csrf
@@ -26,6 +26,7 @@
             <div class="mt-2">
                 <button type="submit" class="btn btn-primary ">Login</button>
                 <input type="checkbox" name="rememberme"> Remember Me
+                <a href=" {{ route('register') }} ">Create new account</a>
             </div>
         </form>
     </div>

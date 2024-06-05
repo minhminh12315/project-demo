@@ -18,14 +18,14 @@
     <header>
         <div class="d-flex justify-content-between p-3 align-items-center">
             <div class="logo">
-                Logo
+                <a href="{{ route('home.index') }}">Logo</a>
             </div>
             <nav>
                 <ul class="d-flex gap-5 align-items-center">
-                    <li class="d-flex align-items-center"><a href="#">Shop</a></li>
+                    <li class="d-flex align-items-center"><a href="{{ route('shop') }}">Shop</a></li>
                     <li class="d-flex align-items-center"><a href="#">About</a></li>
                     <li class="d-flex align-items-center"><a href="#">Contact</a></li>
-                    {!! $user->type == 'admin' ?
+                    {!! $user && $user->type == 'admin' ?
                      '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :
                       ''!!}
                 </ul>
@@ -42,12 +42,14 @@
                         </label>
                     </div>
                 </form>
-                    {!! $user ? $user->name :
+                    {!! $user ? $user->name . '
+                        <a href="'. route('logout') .'" >
+                            Logout
+                        </a>
+                    ' :
                     '<a href="'. route('login') .'" >
-                        <span class="material-symbols-outlined">
-                            person
-                        </span>
-                    </a>' 
+                        Login
+                    </a>'
                     !!}
                 <div>
                     <a href="#">
@@ -75,7 +77,7 @@
                 @foreach ($newPrd as $prd)
                 <div class="col-3">
                     <div class="card mb-2">
-                        <img src="{{asset('assets/image/'. $prd->image)}}" alt="">
+                        <img src="{{asset('assets/image/'. $prd->image)}}" height="350px" alt="">
                         <div class="card-body">
                             <h5 class="card-title
                             ">{{$prd->name}}</h5>
@@ -100,7 +102,6 @@
                             <img src="{{asset('assets/image/' . $prd->image)}}" alt="">
                             <div class="card-body">
                                 <h5 class="card-title ">{{$prd->name}}</h5>
-                                <p class="card-text description">{{$prd->description}}</p>
                                 <p class="card-text price">{{$prd->price}}</p>
                                 <button onclick="addToCart('{{ $prd->id }}')" class="btn btn-primary btn-add-to-card">Add To Cart</button>
                             </div>
@@ -147,17 +148,17 @@
     </footer>
 
     <script>
-        function addToCart(productId) {
+        function addToCart(Id) {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             console.log('CSRF Token:', csrfToken);
-            console.log('Product ID:', productId);
+            console.log('Product ID:', Id);
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 type: 'POST',
                 data: {
                     _token: csrfToken,
-                    product_id: productId
+                    product_id: Id,
                 },
                 success: function(response) {
                     if (response.success) {

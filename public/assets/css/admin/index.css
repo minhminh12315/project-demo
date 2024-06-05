@@ -154,5 +154,9 @@ sidebar ul li a {
 }
 
 .right-site {
-    margin-left: 250px;
+    margin-left: 16%;
 }   
+
+.login-form {
+    min-width: 450px;
+}

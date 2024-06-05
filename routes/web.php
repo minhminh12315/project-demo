@@ -5,10 +5,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/login', [AdminController::class, 'login'])->name('login');
 Route::post('/login', [AdminController::class, 'authenticate'])->name('login.authenticate');
@@ -18,6 +14,10 @@ Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/count', [CartController::class, 'getCartItemCount'])->name('cart.count');
+
+Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+Route::get('/shop/{id}', [HomeController::class, 'shopByCategory'])->name('shop.category');
+Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

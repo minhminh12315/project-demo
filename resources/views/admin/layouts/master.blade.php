@@ -14,7 +14,7 @@
         <div class="row">
                 <sidebar class="col-2">
                         <logo>
-                                Logo
+                                <a href="{{ route('home.index') }}">Logo</a>
                         </logo>
                         <user class="d-flex">
                                 <img src="{{asset('assets/image/anhDepTrai.jpg')}}" alt="avatar">
