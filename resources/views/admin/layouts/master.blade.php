@@ -20,20 +20,21 @@
                                 <img src="{{asset('assets/image/anhDepTrai.jpg')}}" alt="avatar">
                                 <div>{{$name}}</div>
                         </user>
-                        <ul>
+                        <ul>    
+                                <li><a href="{{ route('home.index') }}">Go Page</a></li>
                                 <li><a href="#">Product</a></li>
                                 <li><a href="{{ route('addnew')}}">Add new</a></li>
                         </ul>
                 </sidebar>
-                <div class="col-10">
-                        <div class="position-relative">
+                <div class="col-10 right-site">
+                        <div class="ps-3">
                                 <header >
                                         <nav>
                                                 <div>Here is the admin page</div>
                                         </nav>
                                 </header>
                         </div>
-                        <div class="content-wrapper ">
+                        <div class="content-wrapper">
                                 @yield('content')
                         </div>
                 </div>

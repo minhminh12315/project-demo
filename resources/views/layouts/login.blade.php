@@ -24,7 +24,7 @@
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="mt-2">
-                <button type="submit" class="btn btn-primary ">Register</button>
+                <button type="submit" class="btn btn-primary ">Login</button>
                 <input type="checkbox" name="rememberme"> Remember Me
             </div>
         </form>

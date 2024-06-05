@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-wrapper ">
-    <form action="" method="POST">
+    <form action="{{ route('addnew.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Product Name:</label>
@@ -26,16 +26,12 @@
 
         <div class="form-group">
             <label for="category">Category:</label>
-            <select name="category" id="category" class="form-control" required>
+            <select name="category_id" id="category" class="form-control" required>
                 @foreach ($lstCat as $cat)
                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                 @endforeach
-                <!-- <option value="1">Category 1</option>
-                <option value="2">Category 2</option>
-                <option value="3">Category 3</option> -->
             </select>
         </div>
-
 
         <button type="submit" class="btn btn-primary mt-2">Add Product</button>
     </form>

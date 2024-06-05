@@ -64,7 +64,6 @@ a {
     /* width: 100%; */
     display: block;
     width: calc(100%-250px);
-    margin-left: 250px;
     padding: 1rem;
 }
 
@@ -85,13 +84,14 @@ header ul li{
 }
 
 sidebar {
+    padding-left: 1rem;
     background-color: #343a40;
-    height: 100%;
+    height: 100vh;
     color: #FFFFFFCC;
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
     right: auto;
+    position: fixed;
+    left: 0;
+    min-width: 250px;
 }
 
 sidebar logo {
@@ -105,7 +105,8 @@ sidebar logo {
 }
 
 sidebar user {
-    font-size: 34px;
+    font-size: 24px;
+    
     font-weight: 500;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 0.5rem;
@@ -119,7 +120,6 @@ sidebar user img{
     height: 50px;
     border-radius: 50%;
     margin-right: 1rem;
-    
 }
 
 sidebar ul {
@@ -141,3 +141,18 @@ sidebar ul li a {
     display: block;
     color: #FFFFFFCC;
 }
+
+.table-list-product{
+    outline: rgba(120, 108, 108, 0.412);
+    outline-style: outset;
+    outline-width: 0.5px;
+    border-radius: 8px;
+}
+
+.table-list-product tbody .action {
+    height: 100%;
+}
+
+.right-site {
+    margin-left: 250px;
+}   
