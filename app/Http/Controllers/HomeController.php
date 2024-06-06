@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,30 +30,35 @@ class HomeController extends Controller
             'title' => 'Day la trang Shop'
         ];
 
-        return view('home.layouts.shop', $data);
+        return view('home.shop', $data);
     }
 
     public function shopByCategory($id)
     {
         $data = [
             'user' => auth()->user(),
-            'lstPrd' => Product::where('category_id', $id)->get(),
+            'lstPrd' => Product::where('category_id', $id)
+                                ->groupBy('name')
+                                ->select(DB::raw('MIN(id) as id'),'name', DB::raw('ROUND(AVG(price),2) as price'), DB::raw('MIN(image) as image'))
+                                ->get(),
             'lstCate' => Category::all(),
             'title' => 'Day la trang Shop Detail'
         ];
 
-        return view('home.layouts.shop', $data);
+        return view('home.shop', $data);
     }
 
     public function productDetail($id)
     {
-        $data = [
-            'user' => auth()->user(),
-            'prd' => Product::find($id),
-            'lstCate' => Category::all(),
-            'title' => 'Day la trang Product Detail'
-        ];
+        $user = auth()->user();
+        $prd = Product::find($id);
+        $color = Product::where('name', $prd->name)->select('color')->distinct()->get();
+        $size = Product::where('name', $prd->name)->select('size')->distinct()->get();
+        $lstCate = Category::all();
+        $title = 'Day la trang Product Detail';
 
-        return view('home.layouts.product-detail', $data);
+        $data = compact('user', 'prd', 'color', 'lstCate', 'title', 'size');
+
+        return view('home.product-detail', $data);
     }
 }

@@ -11,37 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request)
-    {   
-        $user = Auth::user();
-
-        $order = Order::firstOrCreate(
-            ['user_id' => $user->id, 'total' => 0]
-        );
-        
-        $orderDetail = OrderDetail::updateOrCreate(
-            ['order_id' => $order->id, 'product_id' => $request->product_id],
-            ['price' => Product::find($request->product_id)->price,'quantity' => DB::raw('quantity + 1')],
-        );
-
-        $orderDetail->price = $request->product_price * $orderDetail->quantity;
-        $orderDetail->save();
-
-        $order->total = $order->orderDetails()->sum(DB::raw('price * quantity'));
-        $order->save();
-
-        $itemCount = $order->orderDetails()->sum('quantity');
-
-        return response()->json(['success' => true, 'item_count' => $itemCount]);
+    public function index()
+    {
+        $data = [
+            'user' => Auth::user()
+        ];
+        return view('home.cart', $data);
     }
 
-    public function getCartItemCount()
+    public function checkout()
     {
-        $user = Auth::user();
-
-        $order = Order::where('user_id', $user->id)->first();
-        $itemCount = $order ? $order->orderDetails()->sum('quantity') : 0;
-
-        return response()->json(['item_count' => $itemCount]);
+        $data = [
+            'user' => Auth::user()
+        ];
+        return view('home.checkout', $data);
     }
 }

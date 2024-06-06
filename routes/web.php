@@ -12,12 +12,12 @@ Route::get('/register', [AdminController::class, 'register'])->name('register');
 Route::post('/register', [AdminController::class, 'store'])->name('register.store');
 Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart/count', [CartController::class, 'getCartItemCount'])->name('cart.count');
-
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [HomeController::class, 'shopByCategory'])->name('shop.category');
 Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('home.checkout');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

@@ -96,4 +96,30 @@ section .container .row .col-3 .card  .price{
 footer {
     background-color: white;
     height: 10rem;
+} 
+
+main .product-detail .row{
+    border-radius: 16px;
 }
+
+main .product-detail .image-wrapper {
+    padding-left: 5rem;
+}
+
+main .product-detail .size-form {
+    /* position: relative; */
+}
+
+main .product-detail .size-input {
+    font-size: 3rem;
+    border-radius: 0px;
+    width: 3rem;
+}
+
+image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
