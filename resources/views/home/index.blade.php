@@ -6,7 +6,7 @@
         <div class="slide">
             <div class="slide-content position-relative">
                 <img src="{{asset('assets\image\224659f4343404b05a435ab3b7697fb4.jpg')}}" alt="{{ $user ? $user->name : 'image'}}">
-                <a href="#" class="btn-shop-now">Shop AN</a>
+                <a href="#" class="btn-shop-now">shop Mingg co khong phai shop An</a>
             </div>
         </div>
 
