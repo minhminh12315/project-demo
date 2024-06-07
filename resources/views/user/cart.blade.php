@@ -137,11 +137,16 @@
                 });
 
                 $('#total').text('Total: ' + total + '$');
+                
+                
 
                 if (cart.length === 0) {
                     cartContainer.append('<p>Your cart is empty</p>');
                 } else {
                     cart.forEach(function(item, index) {
+                        console.log(item);
+                        let totalEachItem = item.price[index] * item.quantity[index];
+                        console.log(totalEachItem);
                         let itemHtml = `
                             <tr>
                                 <td>

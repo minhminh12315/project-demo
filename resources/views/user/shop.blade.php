@@ -1,4 +1,4 @@
-@extends('home.layouts.master')
+@extends('user.layouts.master')
 
 @section('content')
 <div class="container">
@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <img src="{{asset('assets/image/'. $prd->image)}}" height="100%" width="100%" alt="">
                             <div class="card-title">{{$prd->name}}</div>
-                            <div class="card-text">{{$prd->price}} $</div>
+                            <div class="card-text">{{$prd->price}}$</div>
                             <div class="card-text">{{$prd->description}}</div>
                             <a class="btn btn-primary" href="{{ route('product.detail', $prd->id) }}">See Detail</a>
                         </div>

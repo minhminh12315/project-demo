@@ -18,7 +18,7 @@ class HomeController extends Controller
             'title' => 'Day la trang Homepage'
         ];
 
-        return view('home.index', $data);
+        return view('user.index', $data);
     }
 
     public function shop()
@@ -30,7 +30,7 @@ class HomeController extends Controller
             'title' => 'Day la trang Shop'
         ];
 
-        return view('home.shop', $data);
+        return view('user.shop', $data);
     }
 
     public function shopByCategory($id)
@@ -45,7 +45,7 @@ class HomeController extends Controller
             'title' => 'Day la trang Shop Detail'
         ];
 
-        return view('home.shop', $data);
+        return view('user.shop', $data);
     }
 
     public function productDetail($id)
@@ -59,6 +59,6 @@ class HomeController extends Controller
 
         $data = compact('user', 'prd', 'color', 'lstCate', 'title', 'size');
 
-        return view('home.product-detail', $data);
+        return view('user.product-detail', $data);
     }
 }

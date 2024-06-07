@@ -16,7 +16,7 @@ class CartController extends Controller
         $data = [
             'user' => Auth::user()
         ];
-        return view('home.cart', $data);
+        return view('user.cart', $data);
     }
 
     public function checkout()
@@ -24,6 +24,6 @@ class CartController extends Controller
         $data = [
             'user' => Auth::user()
         ];
-        return view('home.checkout', $data);
+        return view('user.checkout', $data);
     }
 }
