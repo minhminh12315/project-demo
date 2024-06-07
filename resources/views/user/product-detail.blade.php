@@ -11,14 +11,15 @@
                         </div>
                     </div>
                     <div class="col-6 ">
+                        <h3 hidden id="id">{{$prd->id}}</h3>
                         <h3 class="card-title pt-4" id="name">{{$prd->name}}</h3>
                         <div class="card-text pt-3" id="price">{{$prd->price}}$</div>
                         <div class="card-text pt-2" >{{$prd->description}}</div>
-                        <form action="/">
+                        <form action="#">
                             <div>
                                 @foreach ($color as $c)
                                     <label for="color">{{$c->color}}</label>
-                                    <input type="radio" name="color" value="{{$c->color}}">
+                                    <input type="radio" name="color" class="{{ $c->color }}" value="{{$c->color}}">
                                 @endforeach
                             </div>
                             <div>

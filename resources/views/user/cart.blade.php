@@ -136,16 +136,13 @@
                     total += item.price * item.quantity;
                 });
 
-                $('#total').text('Total: ' + total + '$');
-                
-                
+                $('#total').text('Total: ' + total.toFixed(2) + '$');
 
                 if (cart.length === 0) {
                     cartContainer.append('<p>Your cart is empty</p>');
                 } else {
                     cart.forEach(function(item, index) {
-                        console.log(item);
-                        let totalEachItem = item.price[index] * item.quantity[index];
+                        let totalEachItem = item.price * item.quantity;
                         console.log(totalEachItem);
                         let itemHtml = `
                             <tr>
@@ -158,7 +155,7 @@
                                 <td>
                                     <input  id="quantity" type="number" value="${item.quantity}" >
                                 </td>
-                                <td>${item.price * item.quantity}$</td>
+                                <td>${totalEachItem.toFixed(2)} $</td>
                                 <td>
                                     <button class="remove-from-cart btn btn-danger" data-index="${index}">Remove</button>
                                 </td>
@@ -177,8 +174,6 @@
             }
             displayCart();
         });
-        
-            
     </script>
 </body>
 

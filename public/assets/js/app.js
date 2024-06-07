@@ -4,12 +4,16 @@ var R = {
     },
     registerEvents: function() {
         $('#addToCart').click(function() {
+            let priceText = document.querySelector('#price').textContent;
+            let priceValue = priceText.replace('$', '').trim();
+            let priceNumber = parseFloat(priceValue).toFixed(2);
             var item = {
+                id: document.querySelector('#id').textContent,
                 name: document.querySelector('#name').textContent,
                 color: document.querySelector('input[name="color"]:checked').value,
                 size: document.querySelector('input[name="size"]:checked').value,
                 quantity: document.querySelector('input[name="quantity"]').value,
-                price: document.querySelector('#price').textContent,
+                price: priceNumber,
                 img: document.querySelector('#image').src
             };
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
