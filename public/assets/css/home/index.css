@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 * {
-    padding: 0px;
-    margin: 0px;
+
     box-sizing: border-box;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
+    padding: 0px;
+    margin: 0px;
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
 }
@@ -17,15 +24,38 @@ li {
     margin-bottom: 10px;
 }
 
-ul, li, a , p , h1, h2, h3, h4, h5, h6 {
+ul,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     text-decoration: none;
     margin: 0px;
     color: #000;
 }
 
+@media screen and (min-width: 1700px) {
+    .container {
+        max-width: calc(100vw - 150px);
+    }
+}
+
 a {
     text-decoration: none;
     color: #000;
+}
+ul{
+    padding: 0px;
+}
+image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 header .logo {
@@ -34,19 +64,69 @@ header .logo {
     line-height: normal;
 }
 
-header nav {
-    height: 100%;
-}
-
 header .home-search {
-    border-radius: 12px;
+    border-radius: 5px;
     border: #35202059 0.8px solid;
     padding-left: 1rem;
+
 }
 
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 93%;
+    transform: translate(-50%, -50%);
+    color: #35202059;
+    transition: 0.15s;
+}
+
+.home-search:focus + label .search-icon {
+    color: #000;
+}
+
+
+.cart-count-wrapper{
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    background-color: white;
+    top: -5px;
+    right: -3px;
+    
+}
 header label {
     display: flex;
     align-items: center;
+}
+
+.home-header .nav-home ul li{
+    font-size: 1.25rem;
+}
+.nav-home ul li {
+    position: relative;
+    display: block;
+}
+
+.nav-home ul li::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: 0.25s ease-in-out ;
+}
+.nav-home ul li:hover::before {
+    width: 100%;
+}
+
+.card-img-top{
+    height: 330px;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 section .slide {
@@ -59,7 +139,7 @@ section .slide img {
     object-fit: cover;
 }
 
-section .slide .slide-content a{
+section .slide .slide-content a {
     background-color: beige;
     border-radius: 18px;
     width: 200px;
@@ -75,30 +155,30 @@ section .container .row .col-3 .card {
     height: 620px;
 }
 
-section .container .row .col-3 .card .description{
+section .container .row .col-3 .card .description {
     font-size: 14px;
 }
 
-section .container .row .col-3 .card .btn-add-to-card{
+section .container .row .col-3 .card .btn-add-to-card {
     text-align: end;
 }
 
-section .container .row .col-3 .card .btn-add-to-card{
+section .container .row .col-3 .card .btn-add-to-card {
     position: absolute;
     bottom: 1rem;
 }
 
-section .container .row .col-3 .card  .price{
+section .container .row .col-3 .card .price {
     position: absolute;
     bottom: 3.7rem;
 }
 
 footer {
     background-color: white;
-    height: 10rem;
-} 
+    height: auto;
+}
 
-main .product-detail .row{
+main .product-detail .row {
     border-radius: 16px;
 }
 
@@ -116,10 +196,24 @@ main .product-detail .size-input {
     width: 3rem;
 }
 
-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* input[type="radio"] {
+    display: none;
 }
 
+input[type="radio"]+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: #000;
+    background-color: white;
+    border: 3px solid #000;
+    border-radius: 4px;
+    padding: 2px;
+}
 
+input[type="radio"]:checked+label {
+    color: white;
+    background-color: #000;
+} */

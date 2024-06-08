@@ -29,18 +29,17 @@
 
     <div class="container .new-collection">
         <h1 class="text-center mt-5 mb-5"> News Collection </h1>
-        <div class="row">
+        <div class="row g-2 row-cols-xxl-5 row-cols-md-4 row-cols-sm-2 row-cols-1">
             @foreach ($newPrd as $prd)
-            <div class="col-3">
+            <div class="col">
                 <div class="card mb-2">
-                    <img src="{{asset('assets/image/'. $prd->image)}}" height="350px" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                    <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
+                    <div class="card-body d-flex flex-column gap-2">
+                        <h5 class="card-title ">
                             {{$prd->name}}
                         </h5>
-                        <p class="card-text description">{{$prd->description}}</p>
                         <p class="card-text price">{{$prd->price}}$</p>
-                        <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-primary btn-add-to-card">See Detail</a>
+                        <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-secondary w-100 btn-add-to-card">See Detail</a>
                     </div>
                 </div>
             </div>
@@ -51,20 +50,20 @@
     <div class="container best-seller">
         <h1 class="text-center mt-5 mb-5"> Best Seller </h1>
         <div class="row">
-
             @foreach ($newPrd as $prd)
             <div class="col-3">
                 <div class="card mb-2">
-                    <img src="{{asset('assets/image/' . $prd->image)}}" alt="">
+                    <img src="{{asset('assets/image/' . $prd->image)}}" class="card-img-top overflow-hidden" width="250px" height="300px" alt="">
                     <div class="card-body">
                         <h5 class="card-title ">{{$prd->name}}</h5>
                         <p class="card-text price">{{$prd->price}}</p>
-                        <button onclick="addToCart('{{ $prd->id }}')" class="btn btn-primary btn-add-to-card">Add To Cart</button>
+                        <button onclick="addToCart('{{ $prd->id }}')" class="btn btn-light btn-add-to-card">Add To Cart</button>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
+    </div>
 </section>
 
 <script>
