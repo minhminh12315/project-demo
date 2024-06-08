@@ -18,6 +18,7 @@ Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('pro
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.checkout');
+Route::post('/checkoutStore', [CartController::class, 'storeOrder'])->name('home.storeOrder');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

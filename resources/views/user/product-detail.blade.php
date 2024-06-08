@@ -19,19 +19,19 @@
                             <div>
                                 @foreach ($color as $c)
                                     <label for="color">{{$c->color}}</label>
-                                    <input type="radio" name="color" class="{{ $c->color }}" value="{{$c->color}}">
+                                    <input type="radio" name="color" class="{{ $c->color }}" value="{{$c->color}}" required>
                                 @endforeach
                             </div>
                             <div>
                                 @foreach ($size as $s)
                                     <label for="size">{{$s->size}}</label>
-                                    <input type="radio" name="size" value="{{$s->size}}">
+                                    <input type="radio" name="size" value="{{$s->size}}" required>
                                 @endforeach
                             </div>
                             <div>
-                                <input type="number" name="quantity">
+                                <input type="number" name="quantity" value="1" required>
                             </div>
-                            <a id="addToCart" class="btn btn-primary">Add to card</a>
+                            <a type="submit" id="addToCart" class="btn btn-primary">Add to card</a>
                         </form>
                     </div>
                 </div>
@@ -39,5 +39,4 @@
         </div>
     </main>
     
-
 @endsection
