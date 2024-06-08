@@ -15,16 +15,52 @@
 </head>
 
 <body>
-    <header class="bg-white mb-5">
-        <div class="d-flex justify-content-between p-3 align-items-center ms-5 ps-5">
-            <div class="logo">
-                <a href="{{ route('home.index') }}">Logo</a>
+    <header class="bg-white home-header">
+        <div class="d-flex flex-column p-2">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <a href="{{ route('home.index') }}">Logo</a>
+                </div>
+                <div class="d-flex gap-3 align-items-center">
+                    <form action="#">
+                        @csrf
+                        <div class="d-flex position-relative">
+                            <input type="text" class="home-search" name="search" id="search" placeholder="Search">
+                            <label for="search" class="align-items-center">
+                                <span class="material-symbols-outlined search-icon">
+                                    search
+                                </span>
+                            </label>
+                        </div>
+                    </form>
+                    @auth
+                    <div>
+                        <a href="{{route('logout')}}">LOG OUT</a>
+                    </div>
+                    @endauth
+                    @guest
+                    <div>
+                        <a href="{{route('login')}}">LOGIN</a>
+                    </div>
+                    @endguest
+                    <div>
+                        <a id="go-cart " href="{{ route('cart.index') }}">
+                            <span class="material-symbols-outlined position-relative" style="font-size: 1.8rem;">
+                                shopping_cart
+                                <div class="cart-count-wrapper d-flex justify-content-center align-items-center">
+                                    <div id="cart-item-count" style="font-size: 1rem;"></div>
+                                </div>
+                            </span>
+
+                        </a>
+                    </div>
+                </div>
             </div>
-            <nav>
+            <nav class="d-flex justify-content-center align-items-center p-3 nav-home">
                 <ul class="d-flex gap-5 align-items-center ">
-                    <li class="d-flex align-items-center"><a href="{{ route('shop') }}">Shop</a></li>
-                    <li class="d-flex align-items-center"><a href="#">About</a></li>
-                    <li class="d-flex align-items-center"><a href="#">Contact</a></li>
+                    <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('shop') }}">Shop</a></li>
+                    <li class="d-flex justify-content-center align-items-center p-1"><a href="#">About</a></li>
+                    <li class="d-flex justify-content-center align-items-center p-1"><a href="#">Contact</a></li>
                     {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
                 </ul>
             </nav>
@@ -40,14 +76,15 @@
                         </label>
                     </div>
                 </form>
-                {!! $user ? $user->name . '
-                <a href="'. route('logout') .'">
-                    Logout
-                </a>' :
-                '<a href="'. route('login') .'">
-                    Login
-                </a>'
-                !!}
+
+                @auth
+                    <div>{{$user->name}}</div>
+                    <a href="{{ route('logout') }}">Logout</a>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}">Login</a>
+                @endguest
+
                 <div>
                     <a id="go-cart" href="{{ route('cart.index') }}">
                         <span class="material-symbols-outlined">
@@ -57,13 +94,5 @@
                     <span id="cart-item-count"></span>
                 </div>
             </div>
-            <nav class="d-flex justify-content-center align-items-center p-3 nav-home">
-                <ul class="d-flex gap-5 align-items-center ">
-                    <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('shop') }}">Shop</a></li>
-                    <li class="d-flex justify-content-center align-items-center p-1"><a href="#">About</a></li>
-                    <li class="d-flex justify-content-center align-items-center p-1"><a href="#">Contact</a></li>
-                    {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
-                </ul>
-            </nav>
         </div>
     </header>
