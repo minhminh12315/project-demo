@@ -40,14 +40,15 @@
                         </label>
                     </div>
                 </form>
-                {!! $user ? $user->name . '
-                <a href="'. route('logout') .'">
-                    Logout
-                </a>' :
-                '<a href="'. route('login') .'">
-                    Login
-                </a>'
-                !!}
+
+                @auth
+                    <div>{{$user->name}}</div>
+                    <a href="{{ route('logout') }}">Logout</a>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}">Login</a>
+                @endguest
+
                 <div>
                     <a id="go-cart" href="{{ route('cart.index') }}">
                         <span class="material-symbols-outlined">
