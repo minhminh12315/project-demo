@@ -64,35 +64,5 @@
                     {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
                 </ul>
             </nav>
-            <div class="d-flex gap-3 align-items-center">
-                <form action="#">
-                    @csrf
-                    <div class="d-flex position-relative">
-                        <input type="text" class="home-search" name="search" id="search" placeholder="Search">
-                        <label for="search" class="align-items-center">
-                            <span class="material-symbols-outlined">
-                                search
-                            </span>
-                        </label>
-                    </div>
-                </form>
-
-                @auth
-                    <div>{{$user->name}}</div>
-                    <a href="{{ route('logout') }}">Logout</a>
-                @endauth
-                @guest
-                    <a href="{{ route('login') }}">Login</a>
-                @endguest
-
-                <div>
-                    <a id="go-cart" href="{{ route('cart.index') }}">
-                        <span class="material-symbols-outlined">
-                            shopping_cart
-                        </span>
-                    </a>
-                    <span id="cart-item-count"></span>
-                </div>
-            </div>
         </div>
     </header>
