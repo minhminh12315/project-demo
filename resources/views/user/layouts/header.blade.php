@@ -45,7 +45,7 @@
                     <div class="dropdown-menu dropdown-menu-end mt-2">
                         <div class="arrow-up"></div>
                         <div class="d-flex flex-column gap-2 align-items-start ps-4">
-                            <a href="">INFO</a>
+                            <a href="{{ route('user.info') }}">INFO</a>
                             <a href="{{route('logout')}}">LOG OUT</a>
                         </div>
                     </div>

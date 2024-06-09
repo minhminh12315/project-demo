@@ -8,8 +8,8 @@
     </div>
     <div class="sidebar-content">
         <ul class="sidebar-list">
-            <li><a disabled href="{{ route('user.info') }}">Info</a></li>
-            <li><a href="{{ route('user.orders') }}">Orders</a></li>
+            <li><a  href="{{ route('user.info') }}">Info</a></li>
+            <li><a disabled href="{{ route('user.orders') }}">Orders</a></li>
         </ul>
     </div>
  </sidebar>
