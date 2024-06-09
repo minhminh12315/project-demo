@@ -45,7 +45,7 @@ var R = {
             } else {
                 cart.push(item);
             }
-            
+
             localStorage.setItem("cart", JSON.stringify(cart));
             R.displayCartCount();
         });
@@ -62,8 +62,6 @@ var R = {
                 checkOutTotal += item.price * item.quantity;
             });
             console.log(checkOutTotal);
-            let name = $("#name").val();
-            let email = $("#email").val();
             let phone = $("#phone").val();
             let address = $("#address").val();
             $.ajax({
@@ -86,14 +84,14 @@ var R = {
                             price: item.price,
                             img: item.img,
                         };
-                    },),
+                    }),
                     total: checkOutTotal.toFixed(2),
                     phone: phone,
                     address: address,
                 },
                 success: function (response) {
-                    console.log('asdfasdfsdf')
-                    console.log(response)
+                    console.log("asdfasdfsdf");
+                    console.log(response);
                     if (response) {
                         let checkOutIds = checkOut.map((item) => item.id);
                         cart = cart.filter(
@@ -143,7 +141,7 @@ var R = {
                         <td>${item.color}</td>
                         <td>${item.price}</td>
                         <td>
-                            <input class="quantity" type="number" data-index="${index}" value="${
+                            <input min="0" class="quantity" type="number" data-index="${index}" value="${
                     item.quantity
                 }" >
                         </td>
@@ -237,6 +235,6 @@ var R = {
     displayCartCount: () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         document.getElementById("cart-item-count").textContent = cart.length;
-    }
+    },
 };
 R.init();
