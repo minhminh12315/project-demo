@@ -1,4 +1,4 @@
-<footer>
+<footer id="footer">
     <div class="container p-3">
         <div class=" pt-3">
             <div class="row g-3 row-cols-md-4 row-cols-sm-2 row-cols-1">
@@ -62,6 +62,7 @@
         document.getElementById('cart-item-count').textContent = cart.length;
     });
 </script>
+</div>
 </body>
 
 </html>

@@ -1,8 +1,7 @@
 @extends('user.layouts.master')
 
 @section('content')
-<section>
-
+<section class="p-0">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             @foreach ($newPrd as $key => $prd)
@@ -28,7 +27,7 @@
 
     <div class="container .new-collection">
         <h1 class="text-center mt-5 mb-5"> News Collection </h1>
-        <div class="row g-2 row-cols-xxl-5 row-cols-md-4 row-cols-sm-2 row-cols-1">
+        <div class="row g-2 row-cols-md-4 row-cols-sm-2 row-cols-1">
             @foreach ($newPrd as $prd)
             <div class="col">
                 <div class="card mb-2">
@@ -50,7 +49,7 @@
 
     <div class="container best-seller">
         <h1 class="text-center mt-5 mb-5"> Best Seller </h1>
-        <div class="row g-2 row-cols-xxl-5 row-cols-md-4 row-cols-sm-2 row-cols-1">
+        <div class="row g-2 row-cols-md-4 row-cols-sm-2 row-cols-1">
             @foreach ($newPrd as $prd)
             <div class="col">
                 <div class="card mb-2">
