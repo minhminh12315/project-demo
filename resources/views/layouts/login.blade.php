@@ -12,6 +12,16 @@
 <body>
     <div class="container mt-5 login-form">
         <h2>Login</h2>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form action="" method="post">
             @csrf
 

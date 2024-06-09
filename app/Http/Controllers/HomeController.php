@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateInfoRequest;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -40,9 +43,9 @@ class HomeController extends Controller
         $data = [
             'user' => auth()->user(),
             'lstPrd' => Product::where('category_id', $id)
-                                ->groupBy('name')
-                                ->select(DB::raw('MIN(id) as id'),'name', DB::raw('ROUND(AVG(price),2) as price'), DB::raw('MIN(image) as image'))
-                                ->get(),
+                ->groupBy('name')
+                ->select(DB::raw('MIN(id) as id'), 'name', DB::raw('ROUND(AVG(price),2) as price'), DB::raw('MIN(image) as image'))
+                ->get(),
             'lstCate' => Category::all(),
             'title' => 'Day la trang Shop Detail'
         ];
@@ -74,17 +77,20 @@ class HomeController extends Controller
         return view('user.info', $data);
     }
 
-    public function updateUserInfo(Request $request)
-    {   
+    public function updateUserInfo(UpdateInfoRequest $request)
+    {
 
         $user = auth()->user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->save();
-
-        return redirect()->route('user.info');
+        if (!Hash::check($request->password, $user->password)) {
+            Log::error('Password and Confirm Password do not match for user id: ' . $user->id);
+            return redirect()->back()->with('error', 'Password and Confirm Password do not match');
+        } else {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->passwordn);
+            $user->save();
+            return redirect()->route('user.info');
+        }
     }
 
     public function orders()

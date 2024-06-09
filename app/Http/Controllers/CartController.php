@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Log;
 class CartController extends Controller
 {
     public function index()
-    {
+    {   
+
+
         $data = [
             'user' => Auth::user()
         ];

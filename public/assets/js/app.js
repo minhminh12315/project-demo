@@ -61,58 +61,68 @@ var R = {
             checkOut.forEach(function (item) {
                 checkOutTotal += item.price * item.quantity;
             });
-            console.log(checkOutTotal);
             let phone = $("#phone").val();
             let address = $("#address").val();
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-                url: "/checkoutStore",
-                method: "POST",
-                data: {
-                    data: checkOut.map((item) => {
-                        // console.log(item);
-                        return {
-                            id: item.id,
-                            name: item.name,
-                            color: item.color,
-                            size: item.size,
-                            quantity: item.quantity,
-                            price: item.price,
-                            img: item.img,
-                        };
-                    }),
-                    total: checkOutTotal.toFixed(2),
-                    phone: phone,
-                    address: address,
-                },
-                success: function (response) {
-                    console.log("asdfasdfsdf");
-                    console.log(response);
-                    if (response) {
-                        let checkOutIds = checkOut.map((item) => item.id);
-                        cart = cart.filter(
-                            (item) => !checkOutIds.includes(item.id)
-                        );
-                        console.log(cart);
-                        localStorage.setItem("cart", JSON.stringify(cart));
-                        R.displayCartCount();
-                        R.displayCart();
-                        R.displayCartCheckOut();
+            if(checkOut.length === 0){
+                alert("Please select product to checkout");
+                return;
+            } else {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: "/checkoutStore",
+                    method: "POST",
+                    data: {
+                        data: checkOut.map((item) => {
+                            // console.log(item);
+                            return {
+                                id: item.id,
+                                name: item.name,
+                                color: item.color,
+                                size: item.size,
+                                quantity: item.quantity,
+                                price: item.price,
+                                img: item.img,
+                            };
+                        }),
+                        total: checkOutTotal.toFixed(2),
+                        phone: phone,
+                        address: address,
+                    },
+                    success: function (response) {
+                        console.log("asdfasdfsdf");
                         console.log(response);
-                    } else {
+                        if (response) {
+                            let checkOutIds = checkOut.map((item) => item.id);
+                            cart = cart.filter(
+                                (item) => !checkOutIds.includes(item.id)
+                            );
+                            console.log(cart);
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                            R.displayCartCount();
+                            R.displayCart();
+                            R.displayCartCheckOut();
+                            console.log(response);
+                        } else {
+                            console.log(response);
+                        }
+                    },
+                    error: function (error, response) {
+                        console.log(error);
                         console.log(response);
-                    }
-                },
-                error: function (error, response) {
-                    console.log(error);
-                    console.log(response);
-                },
-            });
+                    },
+                });
+            }
+
+            
         });
+        $("#logout").click(function () {
+            localStorage.removeItem("cart");
+            R.displayCartCount();
+        })
     },
     displayCart: () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];

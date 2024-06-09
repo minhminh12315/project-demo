@@ -16,15 +16,6 @@ Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [HomeController::class, 'shopByCategory'])->name('shop.category');
 Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('home.checkout');
-Route::post('/checkoutStore', [CartController::class, 'storeOrder'])->name('home.storeOrder');
-
-Route::get('/user_info', [HomeController::class, 'userInfo'])->name('user.info');
-Route::post('/user_info', [HomeController::class, 'updateUserInfo'])->name('user.info.update');
-
-Route::get('/orders', [HomeController::class, 'orders'])->name('user.orders');
-
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/addnew' , [AdminController::class, 'addnew'])->name('addnew');
@@ -32,4 +23,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
     Route::post('/edit/{id}', [AdminController::class, 'update'])->name('edit.update');
     Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('destroy');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('home.checkout');
+    Route::post('/checkoutStore', [CartController::class, 'storeOrder'])->name('home.storeOrder');
+
+    Route::get('/user_info', [HomeController::class, 'userInfo'])->name('user.info');
+    Route::post('/user_info', [HomeController::class, 'updateUserInfo'])->name('user.info.update');
+
+    Route::get('/orders', [HomeController::class, 'orders'])->name('user.orders');
+
 });

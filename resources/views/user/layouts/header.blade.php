@@ -47,7 +47,7 @@
                         <div class="arrow-up"></div>
                         <div class="d-flex flex-column gap-2 align-items-start ps-4">
                             <a href="{{ route('user.info') }}">INFO</a>
-                            <a href="{{route('logout')}}">LOG OUT</a>
+                            <a id="logout" href="{{route('logout')}}">LOG OUT</a>
                         </div>
                     </div>
                     @endauth
