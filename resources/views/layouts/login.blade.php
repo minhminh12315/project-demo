@@ -36,7 +36,7 @@
             <div class="mt-2">
                 <button type="submit" class="btn btn-primary ">Login</button>
                 <input type="checkbox" name="rememberme"> Remember Me
-                <a href=" {{ route('register') }} ">Create new account</a>
+                <span>New to Minggg shop? </span><a href=" {{ route('register') }} ">Join now</a>
             </div>
         </form>
     </div>

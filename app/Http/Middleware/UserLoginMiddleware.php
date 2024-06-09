@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminLoginMiddleware
+class UserLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,6 @@ class AdminLoginMiddleware
     {
         if(!auth()->check()){
             return redirect()->route('login');
-        } else {
-            return redirect()->route('home.index');
         }
         return $next($request);
     }

@@ -136,7 +136,7 @@ var R = {
         $("#total").text("Total: " + total.toFixed(2) + "$");
 
         if (cart.length === 0) {
-            cartContainer.append("<p>Your cart is empty</p>");
+            cartContainer.append("<h5>Your cart is empty</h5>");
         } else {
             cart.forEach(function (item, index) {
                 let totalEachItem = item.price * item.quantity;
@@ -215,7 +215,7 @@ var R = {
         $("#checkOutTotal").text("Total: " + checkOutTotal.toFixed(2) + "$");
 
         if (checkOut.length === 0) {
-            checkOutContainer.append("<p>Your cart is empty</p>");
+            checkOutContainer.append("<h2>Your cart is empty</h2>");
         } else {
             checkOut.forEach(function (item, index) {
                 // console.log(item);

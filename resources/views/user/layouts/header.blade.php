@@ -52,7 +52,7 @@
                     </div>
                     @endauth
                     <div>
-                        <a id="go-cart " href="{{ route('cart.index') }}">
+                        <a id="go-cart" href="{{ route('cart.index') }}">
                             <span class="material-symbols-outlined position-relative" style="font-size: 1.8rem;">
                                 shopping_cart
                                 <div class="cart-count-wrapper d-flex justify-content-center align-items-center">

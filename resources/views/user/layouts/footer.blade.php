@@ -30,8 +30,8 @@
                         <div>
                             <ul>
                                 <li><a href="https://www.facebook.com/minhminh12315"><i class="fa-brands fa-facebook" style="color: #3070df;"></i> Facebook</a></li>
-                                <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #cb1a47;"></i> Instagram</a></li>
-                                <li><a href="#"> <i class="fa-brands fa-twitter" style="color: #1860dc;"></i> Twitter</a></li>
+                                <li><a href="https://www.instagram.com/ddqm05/"><i class="fa-brands fa-instagram" style="color: #cb1a47;"></i> Instagram</a></li>
+                                <li><a href="https://www.linkedin.com/in/minggg0804/"> <i class="fa-brands fa-twitter" style="color: #1860dc;"></i> Twitter</a></li>
                             </ul>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="mt-5">
-            @copy right
+            @copy right Aptechlearning
         </div>
     </div>
 </footer>

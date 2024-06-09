@@ -15,8 +15,6 @@ class CartController extends Controller
 {
     public function index()
     {   
-
-
         $data = [
             'user' => Auth::user()
         ];

@@ -34,6 +34,7 @@
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
+            <span>Already on Minggg Shop? </span><a href=" {{ route('register') }} ">Sign in</a>
         </form>
     </div>
 </body>
