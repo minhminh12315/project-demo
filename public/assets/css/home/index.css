@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
-
     box-sizing: border-box;
     font-family: "Roboto Mono", monospace;
     font-optical-sizing: auto;
@@ -19,9 +18,12 @@ ul {
     list-style-type: none;
 }
 
+<<<<<<< HEAD
 li {
     margin-bottom: 10px;
 }
+=======
+>>>>>>> b3637efcf86755bb2267f6591e73069dff76d794
 ul,
 li,
 a,
