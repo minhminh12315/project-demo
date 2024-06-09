@@ -32,7 +32,7 @@
             @foreach ($newPrd as $prd)
             <div class="col">
                 <div class="card mb-2">
-                    <div>
+                    <div class="overflow-hidden">
                         <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
                         <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-secondary w-100 btn-seeDetail">See Detail</a>
                     </div>
@@ -54,7 +54,7 @@
             @foreach ($newPrd as $prd)
             <div class="col">
                 <div class="card mb-2">
-                    <div>
+                    <div class="overflow-hidden">
                         <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
                         <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-secondary w-100 btn-seeDetail">See Detail</a>
                     </div>
