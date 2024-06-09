@@ -254,6 +254,16 @@ main .product-detail .size-input {
     transition: 0.3s ease-in-out;
 
 }
+
+.product-detail-link {
+    text-transform: capitalize;
+}
+
+.product-detail-link:hover {
+    color: rgb(27, 86, 197);
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+}
 /* input[type="radio"] {
     display: none;
 }

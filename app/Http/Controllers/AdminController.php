@@ -51,10 +51,9 @@ class AdminController extends Controller
 
     public function authenticate(Request $request)
     {   
-        $rememberme = $request->has('rememberme') ? true : false;
         $credentials = $request->only('name', 'password');
 
-        if (auth()->attempt($credentials, $rememberme)) {
+        if (auth()->attempt($credentials)) {
             $user = auth()->user();
             if($user->type == 'admin') {
                 return redirect()->route('admin.index');

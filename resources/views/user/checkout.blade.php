@@ -47,7 +47,8 @@
                 <option value="">Cash</option>
             </select>
         </div> -->
-        <button id="checkOutFinal" type="button" class="btn btn-primary">Checkout</button>
+        <p>Note: Currently the shop only supports direct payment upon receipt</p>
+        <button id="checkOutFinal" type="button" class="btn btn-primary">Order</button>
     </form>
 </div>
 @endsection

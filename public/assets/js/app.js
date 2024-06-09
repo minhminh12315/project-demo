@@ -86,6 +86,7 @@ var R = {
                                 quantity: item.quantity,
                                 price: item.price,
                                 img: item.img,
+                                total: (item.price * item.quantity).toFixed(2),
                             };
                         }),
                         total: checkOutTotal.toFixed(2),
@@ -105,6 +106,8 @@ var R = {
                             R.displayCartCount();
                             R.displayCart();
                             R.displayCartCheckOut();
+                            alert("Order success");
+                            window.location.href = "/";
                             console.log(response);
                         } else {
                             console.log(response);

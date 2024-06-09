@@ -33,7 +33,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/checkoutStore', [CartController::class, 'storeOrder'])->name('home.storeOrder');
 
     Route::get('/user_info', [HomeController::class, 'userInfo'])->name('user.info');
-    Route::post('/user_info', [HomeController::class, 'updateUserInfo'])->name('user.info.update');
+    Route::get('/user_info/edit', [HomeController::class, 'editUserInfo'])->name('user.info.edit');
+    Route::post('/user_info/update', [HomeController::class, 'updateUserInfo'])->name('user.info.update');
+    Route::get('/user_info/edit/password', [HomeController::class, 'editUserInfoPassword'])->name('user.info.edit.password');
+    Route::post('/user_info/edit/password', [HomeController::class, 'updateUserInfoPassword'])->name('user.info.update.password');
 
     Route::get('/orders', [HomeController::class, 'orders'])->name('user.orders');
 });

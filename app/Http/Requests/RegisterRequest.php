@@ -22,8 +22,8 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ];
     }
@@ -36,9 +36,12 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Dien ten cua ban vao',
+            'name.required' => 'Input your name',
+            'name.unique' => 'Username is already taken',
+            'name.name' => 'Name is invalid',
             'email.required' => 'Email is required',
             'email.email' => 'Email is invalid',
+            'email.unique' => 'Email is already taken',
             'password.required' => 'Password is required',
             'password.min' => 'Password must be at least 6 characters',
         ];

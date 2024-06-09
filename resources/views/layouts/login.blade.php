@@ -34,9 +34,8 @@
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="mt-2">
-                <button type="submit" class="btn btn-primary ">Login</button>
-                <input type="checkbox" name="rememberme"> Remember Me
-                <span>New to Minggg shop? </span><a href=" {{ route('register') }} ">Join now</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <span>New to Minggg shop? <a href=" {{ route('register') }} ">Join now</a></span>
             </div>
         </form>
     </div>

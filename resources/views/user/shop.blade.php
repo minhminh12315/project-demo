@@ -8,6 +8,7 @@
                 <div class="category-card p-4">
                     <h3>Categories</h3>
                     <ul class="sidebar-list d-flex flex-column gap-2">
+
                         @foreach ($lstCate as $cate)
                         <li class="p-1">
                             <a class="h-100 w-100" href="{{ route('shop.category', ['id' => $cate->id]) }}">{{ $cate->name }}</a>

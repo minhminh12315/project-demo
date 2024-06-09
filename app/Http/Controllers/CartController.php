@@ -45,6 +45,7 @@ class CartController extends Controller
                 $orderDetail->product_id = $item['id'];
                 $orderDetail->quantity = $item['quantity'];
                 $orderDetail->price = $item['price'];
+                $orderDetail->total = $item['total'];
                 $orderDetail->save();
     
                 Log::info('OrderDetail saved: ' . $orderDetail->id);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class HomeController extends Controller
         $data = [
             'user' => auth()->user(),
             'lstPrd' => Product::all(),
-            'newPrd' => Product::orderBy('created_at', 'desc')->take(8)->get(),
+            'newPrd' => Product::orderBy('created_at', 'desc')->take(10)->get(),
             'title' => 'Day la trang Homepage'
         ];
 
@@ -60,6 +61,7 @@ class HomeController extends Controller
         $color = Product::where('name', $prd->name)->select('color')->distinct()->get();
         $size = Product::where('name', $prd->name)->select('size')->distinct()->get();
         $lstCate = Category::all();
+
         $title = 'Day la trang Product Detail';
 
         $data = compact('user', 'prd', 'color', 'lstCate', 'title', 'size');
@@ -74,12 +76,46 @@ class HomeController extends Controller
             'title' => 'Day la trang User Info'
         ];
 
-        return view('user.info', $data);
+        return view('user.info_detail', $data);
+    }
+
+    public function editUserInfo()
+    {
+        $data = [
+            'user' => auth()->user(),
+            'title' => 'Day la trang User Info'
+        ];
+
+        return view('user.info_edit', $data);
+    }
+
+    public function editUserInfoPassword()
+    {
+        $data = [
+            'user' => auth()->user(),
+            'title' => 'Day la trang User Info'
+        ];
+
+        return view('user.info_edit_password', $data);
+    }
+
+    public function updateUserInfoPassword(Request $request)
+    {
+        $user = auth()->user();
+        if (!Hash::check($request->password, $user->password) || $request->new_password != $request->confirm_password) {
+            Log::error('Password and Confirm Password do not match for user id: ' . $user->id);
+            return redirect()->back()->with('error', 'Password and Confirm Password do not match');
+        } else {
+
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            Log::info('User id: ' . $user->id . ' has updated password');
+            return redirect()->route('user.info');
+        }
     }
 
     public function updateUserInfo(UpdateInfoRequest $request)
     {
-
         $user = auth()->user();
         if (!Hash::check($request->password, $user->password)) {
             Log::error('Password and Confirm Password do not match for user id: ' . $user->id);
@@ -98,9 +134,9 @@ class HomeController extends Controller
         $data = [
             'user' => auth()->user(),
             'title' => 'Day la trang Orders',
-            'lstOrder' => Order::where('user_id', auth()->user()->id)->get()
+            'lstOrder' => Order::where('user_id', auth()->user()->id)->with(['orderDetails.product'])->get(),
         ];
 
-        return view('user.orders', $data);
+        return view('user.info_orders', $data);
     }
 }
