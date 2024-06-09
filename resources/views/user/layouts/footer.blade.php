@@ -6,9 +6,9 @@
                     <div class="d-flex justify-content-center align-items-start flex-column gap-2">
                         <h3>Logo</h3>
                         <div>
-                            <p>Address</p>
-                            <p>Phone</p>
-                            <p>Email</p>
+                            <p>Address: Hanoi, Vietnam</p>
+                            <p>Phone: 0924600804</p>
+                            <p>Email: ddqminh205@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                             <ul class="d-flex flex-column align-items-start">
                                 <li><a href="#">About</a></li>
                                 <li><a href="#">Contact</a></li>
-                                <li><a href="#">Shop</a></li>
+                                <li><a href="{{ route('shop') }}">Shop</a></li>
                             </ul>
                         </div>
                     </div>
