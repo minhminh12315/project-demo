@@ -33,16 +33,23 @@
                             </label>
                         </div>
                     </form>
-                    @auth
-                    <div>
-                        <a href="{{route('logout')}}">LOG OUT</a>
-                    </div>
-                    @endauth
                     @guest
                     <div>
                         <a href="{{route('login')}}">LOGIN</a>
                     </div>
                     @endguest
+                    @auth
+                    <span class="material-symbols-outlined dropdown-toggle userDropdown" type="button" data-bs-toggle="dropdown" data-bs-target="#userCollapse" aria-expanded="false">
+                        person
+                    </span>
+                    <div class="dropdown-menu dropdown-menu-end mt-2">
+                        <div class="arrow-up"></div>
+                        <div class="d-flex flex-column gap-2 align-items-start ps-4">
+                            <a href="">INFO</a>
+                            <a href="{{route('logout')}}">LOG OUT</a>
+                        </div>
+                    </div>
+                    @endauth
                     <div>
                         <a id="go-cart " href="{{ route('cart.index') }}">
                             <span class="material-symbols-outlined position-relative" style="font-size: 1.8rem;">
@@ -54,8 +61,10 @@
 
                         </a>
                     </div>
+
                 </div>
             </div>
+
             <nav class="d-flex justify-content-center align-items-center p-3 nav-home">
                 <ul class="d-flex gap-5 align-items-center ">
                     <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('shop') }}">Shop</a></li>
@@ -64,35 +73,5 @@
                     {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
                 </ul>
             </nav>
-            <div class="d-flex gap-3 align-items-center">
-                <form action="#">
-                    @csrf
-                    <div class="d-flex position-relative">
-                        <input type="text" class="home-search" name="search" id="search" placeholder="Search">
-                        <label for="search" class="align-items-center">
-                            <span class="material-symbols-outlined">
-                                search
-                            </span>
-                        </label>
-                    </div>
-                </form>
-
-                @auth
-                    <div>{{$user->name}}</div>
-                    <a href="{{ route('logout') }}">Logout</a>
-                @endauth
-                @guest
-                    <a href="{{ route('login') }}">Login</a>
-                @endguest
-
-                <div>
-                    <a id="go-cart" href="{{ route('cart.index') }}">
-                        <span class="material-symbols-outlined">
-                            shopping_cart
-                        </span>
-                    </a>
-                    <span id="cart-item-count"></span>
-                </div>
-            </div>
         </div>
     </header>
