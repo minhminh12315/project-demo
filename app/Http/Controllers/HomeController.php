@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -60,5 +62,39 @@ class HomeController extends Controller
         $data = compact('user', 'prd', 'color', 'lstCate', 'title', 'size');
 
         return view('user.product-detail', $data);
+    }
+
+    public function userInfo()
+    {
+        $data = [
+            'user' => auth()->user(),
+            'title' => 'Day la trang User Info'
+        ];
+
+        return view('user.info', $data);
+    }
+
+    public function updateUserInfo(Request $request)
+    {   
+
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+
+        return redirect()->route('user.info');
+    }
+
+    public function orders()
+    {
+        $data = [
+            'user' => auth()->user(),
+            'title' => 'Day la trang Orders',
+            'lstOrder' => Order::where('user_id', auth()->user()->id)->get()
+        ];
+
+        return view('user.orders', $data);
     }
 }

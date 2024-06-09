@@ -20,6 +20,11 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.checkout');
 Route::post('/checkoutStore', [CartController::class, 'storeOrder'])->name('home.storeOrder');
 
+Route::get('/user_info', [HomeController::class, 'userInfo'])->name('user.info');
+Route::post('/user_info', [HomeController::class, 'updateUserInfo'])->name('user.info.update');
+
+Route::get('/orders', [HomeController::class, 'orders'])->name('user.orders');
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/addnew' , [AdminController::class, 'addnew'])->name('addnew');
