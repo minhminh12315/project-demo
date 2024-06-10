@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="p-0">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
         <div class="carousel-indicators">
             @foreach ($newPrd as $key => $prd)
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="{{ $key == 0 ? 'active' : '' }}" aria-label="Slide {{$key}}"></button>
@@ -10,7 +10,7 @@
         </div>
         <div class="carousel-inner">
             @foreach ($newPrd as $key => $prd)
-            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="{{ $key == 0 ? '2500' : '1500' }}">
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="{{ $key == 0 ? '4000' : '2500' }}">
                 <img src="{{asset('assets/image/'. $prd->image)}}" class="d-block w-100" alt="{{ $prd->name }}">
             </div>
             @endforeach
