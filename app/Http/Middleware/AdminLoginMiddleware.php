@@ -17,7 +17,8 @@ class AdminLoginMiddleware
     {
         if(!auth()->check()){
             return redirect()->route('login');
-        } else {
+        } 
+        if(auth()->user()->type != 'admin') {
             return redirect()->route('home.index');
         }
         return $next($request);

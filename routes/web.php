@@ -22,6 +22,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/addnew' , [AdminController::class, 'addnew'])->name('addnew');
     Route::post('/addnew' , [AdminController::class, 'storeProduct'])->name('addnew.store');
+
+    Route::get('/addnew/color', [AdminController::class, 'addnewColor'])->name('addnew.color');
+    Route::post('/addnew/color', [AdminController::class, 'storeColor'])->name('addnew.color.store');
+
+    Route::get('/addnew/size', [AdminController::class, 'addnewSize'])->name('addnew.size');
+    Route::post('/addnew/size', [AdminController::class, 'storeSize'])->name('addnew.size.store');
+
+    Route::get('/addnew/category', [AdminController::class, 'addnewCategory'])->name('addnew.category');
+    Route::post('/addnew/category', [AdminController::class, 'storeCategory'])->name('addnew.category.store');
+
+    Route::get('/addnew/subcategory', [AdminController::class, 'addnewSubCategory'])->name('addnew.subcategory');
+    Route::post('/addnew/subcategory', [AdminController::class, 'storeSubCategory'])->name('addnew.subcategory.store');
+
     Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
     Route::post('/edit/{id}', [AdminController::class, 'update'])->name('edit.update');
     Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('destroy');

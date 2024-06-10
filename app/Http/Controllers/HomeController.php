@@ -57,9 +57,9 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $prd = Product::find($id);
-        $color = Product::where('name', $prd->name)->select('color')->distinct()->get();
-        $size = Product::where('name', $prd->name)->select('size')->distinct()->get();
         $lstCate = Category::all();
+        $color = Product::find($id)->productVariants->groupBy('color')->keys();
+        $size = Product::find($id)->productVariants->groupBy('size')->keys();
 
         $title = 'Day la trang Product Detail';
 

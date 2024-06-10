@@ -59,3 +59,27 @@ INSERT INTO `project-demo`.product (name,description,image,price,category_id,qua
 	 ('Classic Jacket','Classic style jacket','304bd53b348fdc839b86a3e76ffcb459.jpg',59.99,3,10,'White','S',NULL,NULL),
 	 ('Classic Jacket','Classic style jacket','304bd53b348fdc839b86a3e76ffcb459.jpg',59.99,3,10,'White','XS',NULL,NULL),
 	 ('Classic Jacket','Classic style jacket','304bd53b348fdc839b86a3e76ffcb459.jpg',59.99,3,10,'White','L',NULL,NULL);
+
+insert into sub_category (name)
+values
+('standard round neck'),
+('v-neck'),
+('ladies fitted'),
+('long sleeve'),
+('muscle fit'),
+('shift'),
+('bodycon'),
+('a-line'),
+('tent'),
+('babydoll'),
+('sun'),
+('varsity'),
+('fleece'),
+('racer'),
+('motorcycle'),
+('raincoat'),
+('straight'),
+('skinny'),
+('falre'),
+('wide leg'),
+('jogger')

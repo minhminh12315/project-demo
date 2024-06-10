@@ -3,7 +3,7 @@
 @section('content')
 <div class="w-100 gap-3 ps-3">
     <h1>List Product</h1>
-    <table class="table table-bodered table-list-product mt-2">
+    <!-- <table class="table table-bodered table-list-product mt-2">
         <thead>
             <th>Id</th>
             <th>Name</th>
@@ -20,9 +20,22 @@
                 <td>{{$prd->id}}</td>
                 <td>{{$prd->name}}</td>
                 <td>{{$prd->description}}</td>
-                <td>{{$prd->price}}</td>
+                <td>
+                    @foreach($prd->productVariants as $variant)
+                    {{$variant->price}}
+                    @if (!$loop->last)
+                    ,
+                    @endif
+                    @endforeach
+                </td>
                 <td>{{$prd->category->name}}</td>
-                <td><img src="{{asset('assets/image/' . $prd->image)}}" alt="{{$prd->name}}" width="50px" height="50px"></td>
+                <td>
+                    @foreach ($prd->productVariants as $variant)
+                    @foreach ($variant->images as $i)
+                    <img src="{{ asset('' . $i->image_path) }}" alt="" width="100px" height="100px">
+                    @endforeach
+                    @endforeach
+                </td>
                 <td>
                     <div class="d-flex pt-1">
                         <a class="btn btn-primary" href="{{ route('edit', $prd->id) }}">Edit</a>
@@ -32,6 +45,9 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> -->
+    @foreach ($variant->images as $i)
+        <img src="{{ asset($i->image_path) }}" alt="" width="100px" height="100px">
+    @endforeach
 </div>
 @endsection
