@@ -30,7 +30,7 @@
                     <div class="card mb-2">
                         <div class="overflow-hidden">
                             <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
-                            <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-secondary w-75 btn-seeDetail">See Detail</a>
+                            <a href="{{ route('product.detail', $prd->name) }}" class="btn btn-secondary w-75 btn-seeDetail">See Detail</a>
                         </div>
                         <div class="card-body d-flex flex-column gap-2">
                             <h5 class="card-title ">

@@ -17,25 +17,53 @@
             <div class="row bg-white">
                 <div class="col-6 ">
                     <div class="image-wrapper">
-                        <img id="image" src="{{asset('assets/image/'. $prd->image)}}" height="350px" alt="">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @php
+                                $firstImage = true;
+                                @endphp
+                                @foreach ($prd as $prd)
+                                @foreach ($prd->productVariants as $variant)
+                                @foreach ($variant->images as $key => $image)
+                                <div class="carousel-item {{ $firstImage ? 'active' : '' }}">
+                                    <img src="{{ asset($image->image_path) }}" height="500px" class="d-block w-100" alt="...">
+                                </div>
+                                @php
+                                $firstImage = false;
+                                @endphp
+                                @endforeach
+                                @endforeach
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6 ">
                     <h3 hidden id="id">{{$prd->id}}</h3>
                     <h3 class="card-title pt-4" id="name">{{$prd->name}}</h3>
-                    <div class="card-text pt-3" id="price">{{$prd->price}}$</div>
+                    <div class="card-text pt-3" id="price"> 
+                        @foreach($prd->productVariants as $variant)
+                            {{$variant->price}}$
+                        @endforeach
+                    </div>
                     <div class="card-text pt-2">{{$prd->description}}</div>
                     <form action="#">
                         <div>
-                            @foreach ($color as $c)
-                            <label for="color">{{$c->color}}</label>
-                            <input type="radio" name="color" class="{{ $c->color }}" value="{{$c->color}}" required>
-                            @endforeach
+                            <label for="color">Color</label>
+                            {{$prd->productVariants}}
                         </div>
                         <div>
-                            @foreach ($size as $s)
-                            <label for="size">{{$s->size}}</label>
-                            <input type="radio" name="size" value="{{$s->size}}" required>
+                            @foreach ($prd->productVariants as $variant)
+                            <label for="size">{{$variant->size->name}}</label>
+                            <input type="radio" name="size" value="{{$variant->size->name}}" required>
                             @endforeach
                         </div>
                         <div>

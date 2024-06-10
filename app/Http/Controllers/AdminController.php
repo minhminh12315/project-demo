@@ -23,7 +23,6 @@ class AdminController extends Controller
     {
         $data = [
             'lstPrd' => Product::with(['category', 'productVariants', 'productVariants.images'])->get(),
-            "type" => true,
             'name' => auth()->user()->name
         ];
 

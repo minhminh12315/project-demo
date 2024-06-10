@@ -16,7 +16,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Size Name:</label>
-                <input type="text" name="name" id="name" class="text-capitalize form-control" required>
+                <input type="text" name="name" id="name" class="text-uppercase form-control" required>
             </div>
             <button type="submit" class="btn btn-primary mt-2">Add Size</button>
         </form>

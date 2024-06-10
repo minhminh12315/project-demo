@@ -22,7 +22,7 @@
                         </user>
                         <ul>    
                                 <li><a href="{{ route('home.index') }}">Go Page</a></li>
-                                <li><a href="#">Product</a></li>
+                                <li><a href="{{ route('admin.index') }}">Product</a></li>
                                 <li><a href="{{ route('addnew')}}">Add new</a></li>
                         </ul>
                 </sidebar>

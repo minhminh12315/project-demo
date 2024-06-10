@@ -3,12 +3,15 @@
 @section('content')
 <div class="w-100 gap-3 ps-3">
     <h1>List Product</h1>
-    <!-- <table class="table table-bodered table-list-product mt-2">
+    <table class="table table-bodered table-list-product mt-2">
         <thead>
             <th>Id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Color</th>
+            <th>Size</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Category</th>
             <th>Image</th>
             <th>Actions</th>
@@ -18,22 +21,34 @@
             @foreach($lstPrd as $prd)
             <tr>
                 <td>{{$prd->id}}</td>
-                <td>{{$prd->name}}</td>
+                <td class="text-capitalize">{{$prd->name}}</td>
                 <td>{{$prd->description}}</td>
                 <td>
                     @foreach($prd->productVariants as $variant)
-                    {{$variant->price}}
-                    @if (!$loop->last)
-                    ,
-                    @endif
+                    {{$variant->color->name}}
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($prd->productVariants as $variant)
+                    {{$variant->size->name}}
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($prd->productVariants as $variant)
+                        {{$variant->price}}$
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($prd->productVariants as $variant)
+                        {{$variant->quantity}}
                     @endforeach
                 </td>
                 <td>{{$prd->category->name}}</td>
                 <td>
                     @foreach ($prd->productVariants as $variant)
-                    @foreach ($variant->images as $i)
-                    <img src="{{ asset('' . $i->image_path) }}" alt="" width="100px" height="100px">
-                    @endforeach
+                        @foreach ($variant->images as $i)
+                            <img src="{{ asset('' . $i->image_path) }}" alt="" width="100px" height="100px">
+                        @endforeach
                     @endforeach
                 </td>
                 <td>
@@ -45,9 +60,6 @@
             </tr>
             @endforeach
         </tbody>
-    </table> -->
-    @foreach ($variant->images as $i)
-        <img src="{{ asset($i->image_path) }}" alt="" width="100px" height="100px">
-    @endforeach
+    </table>
 </div>
 @endsection

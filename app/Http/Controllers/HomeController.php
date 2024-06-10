@@ -19,8 +19,8 @@ class HomeController extends Controller
     {
         $data = [
             'user' => auth()->user(),
-            'lstPrd' => Product::all(),
-            'newPrd' => Product::orderBy('created_at', 'desc')->take(10)->get(),
+            'newPrd' => Product::with(['category', 'productVariants', 'productVariants.images'])->take(10)->get(),
+            
             'title' => 'Day la trang Homepage'
         ];
 
@@ -53,17 +53,17 @@ class HomeController extends Controller
         return view('user.shop', $data);
     }
 
-    public function productDetail($id)
+    public function productDetail($name)
     {
         $user = auth()->user();
-        $prd = Product::find($id);
+        $prdName = Product::where('name', $name)->first();
+        $prd = Product::where('name', $name)->with(['category', 'productVariants', 'productVariants.images'])->get();
+        // $prd = Product::find($name)->with(['category', 'productVariants', 'productVariants.images'])->first();
         $lstCate = Category::all();
-        $color = Product::find($id)->productVariants->groupBy('color')->keys();
-        $size = Product::find($id)->productVariants->groupBy('size')->keys();
-
+        // $color = Product::find($name)->productVariants->groupBy('color')->keys();
         $title = 'Day la trang Product Detail';
 
-        $data = compact('user', 'prd', 'color', 'lstCate', 'title', 'size');
+        $data = compact('user', 'lstCate', 'title','prd');
 
         return view('user.product-detail', $data);
     }

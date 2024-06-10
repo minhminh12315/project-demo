@@ -8,7 +8,7 @@
     </user>
     <ul>
         <li><a href="{{ route('admin.gopage') }}">Go Page</a></li>
-        <li><a href="#">Product</a></li>
+        <li><a href="{{ route('admin.index') }}">Product</a></li>
         <li><a href="{{ route('addnew')}}">Add new</a></li>
     </ul>
 </sidebar>

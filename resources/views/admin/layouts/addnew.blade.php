@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label for="color">Color: </label>
-            <select name="color" id="color" class="form-control text-capitalize" required>
+            <select name="color" id="color" class="form-control" required>
                 @foreach ($lstColor as $color)
                 <option class="text-capitalize" value="{{$color->id}}">{{$color->name}}</option>
                 @endforeach
@@ -31,9 +31,9 @@
 
         <div class="form-group">
             <label for="size">Size: </label>
-            <select name="size" id="size" class="form-control text-capitalize" required>
+            <select name="size" id="size" class="form-control" required>
                 @foreach ($lstSize as $size)
-                <option class="text-capitalize" value="{{$size->id}}">{{$size->name}}</option>
+                <option class="" value="{{$size->id}}">{{$size->name}}</option>
                 @endforeach
             </select>
         </div>

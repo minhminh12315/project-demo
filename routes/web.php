@@ -14,7 +14,7 @@ Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [HomeController::class, 'shopByCategory'])->name('shop.category');
-Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
+Route::get('/product/{name}', [HomeController::class, 'productDetail'])->name('product.detail');
 
     
 
