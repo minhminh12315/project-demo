@@ -4,7 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-
             <sidebar>
                 <div class="category-card p-4">
                     <h3>My Account</h3>
@@ -18,7 +17,7 @@
             </sidebar>
         </div>
         <div class="col-9">
-            @yield('info-content')
+                @yield('info-content')
         </div>
     </div>
 </div>

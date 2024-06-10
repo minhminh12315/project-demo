@@ -35,7 +35,6 @@ class HomeController extends Controller
             'lstCate' => Category::all(),
             'title' => 'Day la trang Shop'
         ];
-
         return view('user.shop', $data);
     }
 
@@ -46,7 +45,7 @@ class HomeController extends Controller
             'lstPrd' => Product::where('category_id', $id)
                 ->groupBy('name')
                 ->select(DB::raw('MIN(id) as id'), 'name', DB::raw('ROUND(AVG(price),2) as price'), DB::raw('MIN(image) as image'))
-                ->get(),
+                ->with(['category'])->get(),
             'lstCate' => Category::all(),
             'title' => 'Day la trang Shop Detail'
         ];
@@ -89,6 +88,23 @@ class HomeController extends Controller
         return view('user.info_edit', $data);
     }
 
+    public function updateUserInfo(UpdateInfoRequest $request)
+    {
+        $user = auth()->user();
+        if (!Hash::check($request->password, $user->password)) {
+            Log::error('Password and Confirm Password do not match for user id: ' . $user->id);
+            return redirect()->back()->with('error', 'Password and Confirm Password do not match');
+        } else {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->password = bcrypt($request->passwordn);
+            $user->save();
+            return redirect()->route('user.info');
+        }
+    }
+
     public function editUserInfoPassword()
     {
         $data = [
@@ -114,20 +130,7 @@ class HomeController extends Controller
         }
     }
 
-    public function updateUserInfo(UpdateInfoRequest $request)
-    {
-        $user = auth()->user();
-        if (!Hash::check($request->password, $user->password)) {
-            Log::error('Password and Confirm Password do not match for user id: ' . $user->id);
-            return redirect()->back()->with('error', 'Password and Confirm Password do not match');
-        } else {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->passwordn);
-            $user->save();
-            return redirect()->route('user.info');
-        }
-    }
+    
 
     public function orders()
     {

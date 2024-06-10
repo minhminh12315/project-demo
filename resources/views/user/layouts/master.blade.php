@@ -1,6 +1,6 @@
 @include('user.layouts.header')
 
-<div id="content">
+<div class="content">
     @yield('content')
 </div>
 

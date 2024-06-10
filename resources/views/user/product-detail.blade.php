@@ -5,6 +5,8 @@
 <main>
     <div class="container">
         @if (isset($prd->category))
+        <a class="product-detail-link" href="{{ route('home.index') }}">Main Page</a>
+        <span>-></span>
         <a class="product-detail-link" href="{{ route('shop') }}">shop</a>
         <span>-></span>
         <a class="product-detail-link" href="{{ route('shop.category', ['id' => $prd->category->id]) }}">{{ $prd->category->name }}</a>

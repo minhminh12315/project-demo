@@ -28,7 +28,7 @@ html {
     height: 250px;
 }
 
-#content {
+.content {
     padding-top: 10px;
     padding-bottom: 250px;
 }

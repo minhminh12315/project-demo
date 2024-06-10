@@ -19,7 +19,12 @@
             </sidebar>
         </div>
         <div class="col-9">
+                <h2>@if (isset($lstPrd->category))
+                    {{$lstPrd->$category->name}}
+                    @endif
+                </h2>
             <div class="row g-2 row-cols-md-3 row-cols-sm-2 row-cols-1">
+                
                 @foreach ($lstPrd as $prd)
                 <div class="col">
                     <div class="card mb-2">

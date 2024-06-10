@@ -2,7 +2,6 @@
 
 @section('info-content')
 <main>
-
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -13,7 +12,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Order ID</th>
-                                    <th scope="col">Product Name: </th>
+                                    <th scope="col">Items: </th>
                                     <th scope="col">Quantity: </th>
                                     <th scope="col">Price: </th>
                                     <th scope="col">Total: </th>
@@ -24,7 +23,7 @@
                                 @foreach($order->orderDetails as $orderDetail)
                                 <tr>
                                     <td>{{ $order->id }}</td>
-                                    <td>{{ $orderDetail->product->name }}</td>
+                                    <td>{{ $orderDetail->product->name }} - {{ $orderDetail->product->color }} - {{ $orderDetail->product->size }}  </td>
                                     <td>{{ $orderDetail->quantity }}</td>
                                     <td>{{ $orderDetail->product->price }}</td>
                                     <td>{{ $orderDetail->total }}</td>
