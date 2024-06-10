@@ -8,6 +8,7 @@ use App\Http\Requests\AddnewSizeRequest;
 use App\Http\Requests\AddnewSubCategoryRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Category;
+use App\Models\CategorySubCategory;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -112,6 +113,11 @@ class AdminController extends Controller
         $productVariant->size_id = $request->size;
         $productVariant->save();
 
+        
+        $categorySubCategory = new CategorySubCategory();
+        $categorySubCategory->category_id = $request->category_id;
+        $categorySubCategory->sub_category_id = $request->sub_category_id;
+
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $imageName = uniqid(time(), true) . '.' . $image->getClientOriginalExtension();
@@ -123,8 +129,6 @@ class AdminController extends Controller
                 $productVariantImage->save();
             }
         }
-
-
 
         return redirect()->route('admin.index');
     }

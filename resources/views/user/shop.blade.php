@@ -12,6 +12,7 @@
                         @foreach ($lstCate as $cate)
                         <li class="p-1">
                             <a class="h-100 w-100" href="{{ route('shop.category', ['id' => $cate->id]) }}">{{ $cate->name }}</a>
+                            
                         </li>
                         @endforeach
                     </ul>

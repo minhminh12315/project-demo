@@ -6,22 +6,47 @@ var R = {
         R.displayCartCount();
     },
     registerEvents: function () {
+        $('#color').change(function () {
+            let name = $("#name").text();
+            let color = $(this).val();
+            var token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                url: '/getProductByColor',
+                method: 'POST',
+                data: {
+                    name: name,
+                    color: color
+                },
+                success: function(response) {
+                    $('#size').empty();
+                    if(response.data.sizesByColor.length > 1){
+                        response.data.sizesByColor.forEach(function(response){
+                            $('#size').append(`<option value="${response.name}">${response.name}</option>`);
+                        })
+                    } else {
+                        console.log(response.data.sizesByColor[0].name)
+                        $('#size').append(`<option value="${response.data.sizesByColor}">${response.data.sizesByColor[0].name}</option>`);
+                    }
+                },
+                error: function(xhr) {
+                    console.log('An error occurred:', xhr);
+                }
+            });
+        })
         $("#addToCart").click(function () {
             let priceText = document.querySelector("#price").textContent;
             let priceValue = priceText.replace("$", "").trim();
             let priceNumber = parseFloat(priceValue).toFixed(2);
 
             var item = {
-                id: document.querySelector("#id").textContent,
-                name: document.querySelector("#name").textContent,
-                color: document.querySelector('input[name="color"]:checked')
-                    .value,
-                size: document.querySelector('input[name="size"]:checked')
-                    .value,
-                quantity: document.querySelector('input[name="quantity"]')
-                    .value,
+                name: $("#name").text(),
+                color: $("#color").val(),
+                size: $("#size").val(),
+                quantity: $("#quantity").val(),
                 price: priceNumber,
-                img: document.querySelector("#image").src,
                 checkout: false,
             };
             let cart = JSON.parse(localStorage.getItem("cart")) || [];

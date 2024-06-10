@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,7 @@ class HomeController extends Controller
             'user' => auth()->user(),
             'lstPrd' => Product::all(),
             'lstCate' => Category::all(),
+            'lstSub'
             'title' => 'Day la trang Shop'
         ];
         return view('user.shop', $data);
@@ -55,17 +57,43 @@ class HomeController extends Controller
 
     public function productDetail($name)
     {
+
+        
         $user = auth()->user();
         $prdName = Product::where('name', $name)->first();
         $prd = Product::where('name', $name)->with(['category', 'productVariants', 'productVariants.images'])->get();
-        // $prd = Product::find($name)->with(['category', 'productVariants', 'productVariants.images'])->first();
-        $lstCate = Category::all();
-        // $color = Product::find($name)->productVariants->groupBy('color')->keys();
-        $title = 'Day la trang Product Detail';
+        
+        $uniqueColors = $prd->flatMap(function ($product) {
+            return $product->productVariants->map(function ($variant) {
+                return $variant->color->name;
+            });
+        })->unique();
 
-        $data = compact('user', 'lstCate', 'title','prd');
+        $uniqueSizes = $prd->flatMap(function ($product) {
+            return $product->productVariants->map(function ($variant) {
+                return $variant->size->name;
+            });
+        })->unique();
+
+        $data = compact('user', 'prd', 'prdName','uniqueColors', 'uniqueSizes');
 
         return view('user.product-detail', $data);
+    }
+
+    public function productDetailColor(Request $request)
+    {
+        $sizesByColor = DB::table('product as p')
+        ->join('product_variant as pv', 'p.id', '=', 'pv.product_id')
+        ->join('color as c', 'pv.color_id', '=', 'c.id')
+        ->join('size as s', 'pv.size_id', '=', 's.id')
+        ->where('p.name', $request->name)
+        ->where('c.name', $request->color)
+        ->select('s.name')
+        ->get();
+        
+        $data = compact('sizesByColor');
+
+        return response()->json(['data' => $data]);
     }
 
     public function userInfo()
