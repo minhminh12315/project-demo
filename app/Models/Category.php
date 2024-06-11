@@ -11,11 +11,18 @@ class Category extends Model
     protected $table = 'category';
     protected $fillable = ['name'];
 
-    public function subCategory()
+    // Define the relationships
+
+    public function parent()
     {
-        return $this->belongsToMany(SubCategory::class, 'category_sub_category', 'category_id', 'sub_category_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+    
     public function product()
     {
         return $this->hasMany(Product::class);

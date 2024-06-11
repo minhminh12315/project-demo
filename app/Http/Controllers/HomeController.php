@@ -32,10 +32,9 @@ class HomeController extends Controller
     {
         $data = [
             'user' => auth()->user(),
-            'lstPrd' => Product::all(),
+            'lstPrd' => Product::with(['category', 'productVariants', 'productVariants.images'])->get(),
             'lstCate' => Category::all(),
-            'lstSub'
-            'title' => 'Day la trang Shop'
+            'lstCateSubCate' => Category::with('subCategory')->get(),
         ];
         return view('user.shop', $data);
     }

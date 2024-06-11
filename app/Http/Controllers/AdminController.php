@@ -94,7 +94,10 @@ class AdminController extends Controller
     }
 
     public function storeProduct(Request $request)
-    {
+    { 
+        // $subCate = new SubCategory();
+        // $subCate->name = $request->sub_category;
+
         $product = new Product;
         $product->name = $request->name;
         $product->description = $request->description;
@@ -117,6 +120,7 @@ class AdminController extends Controller
         $categorySubCategory = new CategorySubCategory();
         $categorySubCategory->category_id = $request->category_id;
         $categorySubCategory->sub_category_id = $request->sub_category_id;
+        $categorySubCategory->save();
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -247,6 +251,7 @@ class AdminController extends Controller
     public function delete($id)
     {
         Product::destroy($id);
+        
         return redirect()->route('admin.index');
     }
 }

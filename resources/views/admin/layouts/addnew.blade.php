@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <label for="images">Image: </label>
-            <input type="file" name="images[]" id="images" class="form-control" multiple required>
+            <input type="file" name="images[]" id="images" class="form-control" multiple>
         </div>
 
         <div class="form-group">
@@ -72,6 +72,11 @@
         <button type="submit" class="btn btn-primary mt-2">Add Product</button>
     </form>
 </div>
+@foreach ($lstSubCat as $subCat)
+
+{{$subCat}}     
+
+@endforeach
 
 
 @endsection

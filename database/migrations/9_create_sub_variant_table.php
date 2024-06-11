@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('size', function (Blueprint $table) {
+        Schema::create('sub_variant', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('product_variant_id')->constrained('product_variant')->onDelete('cascade');
+            $table->foreignId('variant_option_id')->constrained('variant_option')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('size');
+        Schema::dropIfExists('sub_variant');
     }
 };
