@@ -39,6 +39,18 @@ class HomeController extends Controller
         return view('user.shop', $data);
     }
 
+    public function about(){
+        $data = [
+            'user' => auth()->user(),
+        ];
+        return view('user.about', $data);
+    }
+    public function contact(){
+        $data = [
+            'user' => auth()->user(),
+        ];
+        return view('user.contact', $data);
+    }
     public function shopByCategory($id)
     {
         $data = [

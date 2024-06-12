@@ -25,11 +25,12 @@
         </button>
     </div>
 
-    <div class="container .new-collection">
+    <div class="container new-collection">
         <h1 class="text-center mt-5 mb-5"> News Collection </h1>
-        <div class="row g-2 row-cols-md-4 row-cols-sm-2 row-cols-1">
+        <div class="row g-2 row-cols-lg-4 row-cols-md-2 row-cols-1">
             @foreach ($newPrd as $prd)
             <div class="col">
+<<<<<<< Updated upstream
                 <div class="card mb-2">
                     <div class="overflow-hidden">
                         @foreach ($prd->productVariants as $variant)
@@ -44,6 +45,19 @@
                         </h5>
                         <p class="card-text price">{{$prd->price}}$</p>
                     </div>
+=======
+                <div class="card mb-2" style="height: 30rem">
+                    <a href="{{ route('product.detail', $prd->id) }}">
+                        <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
+
+                        <div class="card-body d-flex flex-column gap-2">
+                            <h5 class="card-title ">
+                                {{$prd->name}}
+                            </h5>
+                            <p class="card-text price">{{$prd->price}}$</p>
+                        </div>
+                    </a>
+>>>>>>> Stashed changes
                 </div>
             </div>
             @endforeach
@@ -52,20 +66,20 @@
 
     <div class="container best-seller">
         <h1 class="text-center mt-5 mb-5"> Best Seller </h1>
-        <div class="row g-2 row-cols-md-4 row-cols-sm-2 row-cols-1">
+        <div class="row g-2 row-cols-lg-4 row-cols-md-2 row-cols-1">
             @foreach ($newPrd as $prd)
             <div class="col">
-                <div class="card mb-2">
-                    <div class="overflow-hidden">
+                <div class="card mb-2" style="height: 30rem">
+                    <a href="{{ route('product.detail', $prd->id) }}">
                         <img src="{{asset('assets/image/'. $prd->image)}}" class="card-img-top" alt="">
-                        <a href="{{ route('product.detail', $prd->id) }}" class="btn btn-secondary w-75 btn-seeDetail">See Detail</a>
-                    </div>
-                    <div class="card-body d-flex flex-column gap-2">
-                        <h5 class="card-title ">
-                            {{$prd->name}}
-                        </h5>
-                        <p class="card-text price">{{$prd->price}}$</p>
-                    </div>
+
+                        <div class="card-body d-flex flex-column gap-2">
+                            <h5 class="card-title ">
+                                {{$prd->name}}
+                            </h5>
+                            <p class="card-text price">{{$prd->price}}$</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             @endforeach

@@ -16,9 +16,15 @@ Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [HomeController::class, 'shopByCategory'])->name('shop.category');
+<<<<<<< Updated upstream
 Route::get('/product/{name}', [HomeController::class, 'productDetail'])->name('product.detail');
 Route::post('/getProductByColor', [HomeController::class, 'productDetailColor'])->name('product.detail.color');
 
+=======
+Route::get('/product/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+>>>>>>> Stashed changes
     
 
 Route::middleware(['auth', 'admin'])->group(function () {

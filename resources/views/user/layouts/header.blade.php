@@ -17,24 +17,28 @@
 
 <body>
     <div id="web-container">
-        <header class="bg-white home-header">
-            <div class="d-flex flex-column p-2">
-                <div class="container d-flex justify-content-between align-items-center">
-                    <div class="logo">
-                        <a href="{{ route('home.index') }}">Logo</a>
-                    </div>
-                    <div class="d-flex gap-3 align-items-center">
-                        <form action="#">
-                            @csrf
-                            <div class="d-flex position-relative">
-                                <input type="text" class="home-search" name="search" id="search" placeholder="Search">
-                                <label for="search" class="align-items-center">
-                                    <span class="material-symbols-outlined search-icon">
-                                        search
-                                    </span>
-                                </label>
-                            </div>
-                        </form>
+        <header class="bg-white home-header position-relative">
+            <div class="overlay"></div>
+            <div class="container p-2">
+                <button class="btn btn-navbarCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar" aria-controls="collapseNavbar" aria-expanded="false" aria-controls="collapseNavbar">
+                    <i class="fa-solid fa-bars fa-xl"></i>
+                </button>
+                <div class="logo">
+                    <a href="{{ route('home.index') }}">Logo</a>
+                </div>
+                <div class="d-flex gap-3 align-items-center">
+                    <form action="#" class="positon-relative">
+                        @csrf
+                        <div class="d-flex position-relative">
+                            <input type="text" class="home-search" name="search" id="search" placeholder="Search">
+                            <label for="search" class="align-items-center">
+                                <span class="material-symbols-outlined search-icon">
+                                    search
+                                </span>
+                            </label>
+                        </div>
+                    </form>
+                    <div class="logInOut-wrapper">
                         @guest
                         <div>
                             <a href="{{route('login')}}">LOGIN</a>
@@ -51,28 +55,54 @@
                             </div>
                         </div>
                         @endauth
-                        <div>
-                            <a id="go-cart" href="{{ route('cart.index') }}">
-                                <span class="material-symbols-outlined position-relative" style="font-size: 1.8rem;">
-                                    shopping_cart
-                                    <div class="cart-count-wrapper d-flex justify-content-center align-items-center">
-                                        <div id="cart-item-count" style="font-size: 1rem;"></div>
-                                    </div>
-                                </span>
+                    </div>
+                    <div>
+                        <a id="go-cart" href="{{ route('cart.index') }}">
+                            <span class="material-symbols-outlined position-relative" style="font-size: 1.8rem;">
+                                shopping_cart
+                                <div class="cart-count-wrapper d-flex justify-content-center align-items-center">
+                                    <div id="cart-item-count" style="font-size: 1rem;"></div>
+                                </div>
+                            </span>
 
-                            </a>
-                        </div>
-
+                        </a>
                     </div>
                 </div>
-
-                <nav class="d-flex justify-content-center align-items-center p-3 nav-home">
+                <nav class="d-flex justify-content-center align-items-center p-3 nav-home w-100">
                     <ul class="d-flex gap-5 align-items-center ">
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('home.index') }}">Home</a></li>
                         <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('shop') }}">Shop</a></li>
-                        <li class="d-flex justify-content-center align-items-center p-1"><a href="#">About</a></li>
-                        <li class="d-flex justify-content-center align-items-center p-1"><a href="#">Contact</a></li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{route('about')}}">About</a></li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{route('contact')}}">Contact</a></li>
                         {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
                     </ul>
                 </nav>
+            </div>
+            <div class="collapse" id="collapseNavbar">
+                <div class="d-flex ">
+                    <ul class="d-flex flex-column gap-2 align-items-start p-2">
+                        <li class="d-flex justify-content-center align-items-center p-1">
+                            @guest
+                            <a href="{{route('login')}}">LOGIN</a>
+                            @endguest
+                            @auth
+                            <span class="material-symbols-outlined dropdown-toggle userDropdown" type="button" data-bs-toggle="dropdown" data-bs-target="#userCollapse" aria-expanded="false">
+                                person
+                            </span>
+                            <div class="dropdown-menu dropdown-menu-end mt-2">
+                                <div class="d-flex flex-column gap-2 align-items-start ps-4">
+                                    <a href="{{ route('user.info') }}">INFO</a>
+                                    <a id="logout" href="{{route('logout')}}">LOG OUT</a>
+                                </div>
+                            </div>
+                            @endauth
+                        </li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('home.index') }}">Home</a></li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{ route('shop') }}">Shop</a></li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{route('about')}}">About</a></li>
+                        <li class="d-flex justify-content-center align-items-center p-1"><a href="{{route('contact')}}">Contact</a></li>
+                        {!! $user && $user->type == 'admin' ? '<li class="d-flex align-items-center"><a href="'. route('admin.index') .'">Admin</a></li>' :''!!}
+                    </ul>
+                </div>
             </div>
         </header>

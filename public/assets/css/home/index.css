@@ -71,7 +71,6 @@ ul {
 image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 header .logo {
@@ -118,9 +117,26 @@ header label {
     align-items: center;
 }
 
+.nav-home {
+    transition: 0.3s ease;
+}
+
+.navbarSticky {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-home.navbarSticky {
+    background-color: #fff;
+}
+
+
 .home-header .nav-home ul li {
     font-size: 1.25rem;
 }
+
 
 .nav-home ul li {
     position: relative;
@@ -143,8 +159,9 @@ header label {
 }
 
 .card-img-top {
-    height: 330px;
-    object-fit: cover;
+    height: 20rem;
+    width: 100%;
+    object-fit: contain;
     overflow: hidden;
     transition: 0.5s ease-in-out;
 }
@@ -159,9 +176,6 @@ header label {
     font-size: 2rem !important;
 }
 
-section .slide {
-    width: 100%;
-}
 
 section .slide img {
     width: 100%;
@@ -178,13 +192,10 @@ main .product-detail .row {
     border-radius: 16px;
 }
 
-main .product-detail .image-wrapper {
-    padding-left: 5rem;
+main .product-detail .img-prdDetail {
+    border-radius: inherit;
 }
 
-main .product-detail .size-form {
-    /* position: relative; */
-}
 
 main .product-detail .size-input {
     font-size: 3rem;
@@ -197,33 +208,14 @@ main .product-detail .size-input {
     transition: 0.25s ease-in-out;
 }
 
-.btn-seeDetail {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-}
-
-
-.card:hover .btn-seeDetail {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-}
-
 .card:hover .card-img-top {
     transform: scale(1.1);
-    filter: grayscale(0.5) brightness(0.4);
 }
 
 .card:hover {
-    transform: scale(1.03);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(201, 201, 201, 1);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(201, 201, 201, 1);
+    box-shadow: 5px 5px 5px 0px rgba(201, 201, 201, 1);
 }
 
 .category-card {
@@ -238,17 +230,19 @@ main .product-detail .size-input {
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
 }
-.sidebar-list li{
+
+.sidebar-list li {
     width: 100%;
-    border-bottom:1px solid rgba(0, 0, 0, 0.125) ;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     overflow: hidden;
 }
 
-.sidebar-list li:last-child{
-    border-bottom:none !important; ;
+.sidebar-list li:last-child {
+    border-bottom: none !important;
+    ;
 }
 
-.sidebar-list li:hover a{
+.sidebar-list li:hover a {
     font-size: 1.25rem;
     font-weight: bold;
     transition: 0.3s ease-in-out;
@@ -264,24 +258,140 @@ main .product-detail .size-input {
     text-decoration: underline;
     transition: 0.3s ease-in-out;
 }
-/* input[type="radio"] {
+
+.btn-navbarCollapse {
     display: none;
 }
 
-input[type="radio"]+label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    color: #000;
-    background-color: white;
-    border: 3px solid #000;
-    border-radius: 4px;
-    padding: 2px;
+#collapseNavbar {
+    transition: all 0.5 ease-in-out;
 }
 
-input[type="radio"]:checked+label {
-    color: white;
-    background-color: #000;
-} */
+.home-header .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-navbarCollapse {
+        display: block;
+    }
+
+    #collapseNavbar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 75vw;
+        z-index: 2000;
+        background-color: #fff;
+    }
+
+    .navbarSticky {
+        position: static;
+    }
+
+    .nav-home {
+        display: none !important;
+    }
+
+    .home-header .container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .home-search {
+        display: none;
+    }
+
+    .search-icon {
+        font-size: 2rem;
+        color: black !important;
+    }
+
+    .logInOut-wrapper {
+        display: none;
+    }
+
+    .home-search.active {
+        display: block;
+        position: absolute;
+        top: 32px;
+        right: -14px;
+        z-index: 100;
+    }
+}
+
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Điều chỉnh độ mờ ở đây */
+    z-index: 998;
+    /* Đảm bảo overlay nằm dưới các phần tử khác nhưng trên collapseNavbar */
+}
+
+.collapse.show+.overlay {
+    display: block;
+    /* Hiển thị overlay khi collapseNavbar được mở */
+}
+
+body.overlay-visible {
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+body.overlay-visible #collapseNavbar {
+    pointer-events: auto;
+    /* Cho phép tương tác với collapse khi overlay hiển thị */
+    opacity: 1 !important;
+    /* Loại bỏ hiệu ứng làm mờ cho collapse khi overlay hiển thị */
+}
+.img-about{
+    width: 50%;
+    height: auto;
+    object-fit: contain;
+}
+.inp-color ul li{
+    font-size: 1.125rem;
+    padding: 5px;
+    border:3px solid #c8c8c8 ;
+    color: #c8c8c8;
+    transition: 0.15s ease-in-out;
+}
+.inp-size ul li{
+    font-size: 1.125rem;
+    padding: 5px;
+    border:3px solid #c8c8c8 ;
+    color: #c8c8c8;
+}
+
+
+.inp-color ul li:hover{
+    border:3px solid #000 ;
+    color: #000;
+}
+
+.inp-size ul li:hover{
+    border:3px solid #000 ;
+    color: #000;
+}
+
+.inp-color ul li.selected{
+    border:3px solid #000 ;
+    color: #000;
+}
+
+.inp-size ul li.selected{
+    border:3px solid #000 ;
+    color: #000;
+}

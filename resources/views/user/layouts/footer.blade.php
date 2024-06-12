@@ -1,7 +1,7 @@
 <footer id="footer">
     <div class="container p-3">
         <div class=" pt-3">
-            <div class="row g-3 row-cols-md-4 row-cols-sm-2 row-cols-1">
+            <div class="row g-3 row-cols-lg-4 row-cols-md-2 row-cols-1">
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-start flex-column gap-2">
                         <h3>Logo</h3>

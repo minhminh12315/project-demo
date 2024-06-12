@@ -15,6 +15,7 @@
         <a class="product-detail-link" href="{{ route('product.detail', $prdName->id) }}">{{ $prdName->name }}</a>
         @endif
         <div class="product-detail p-5">
+<<<<<<< Updated upstream
             <div class="row bg-white">
                 <div class="col-6 ">
                     <div class="image-wrapper">
@@ -81,8 +82,47 @@
                         </div>
                         <a type="submit" id="addToCart" class="btn btn-primary mt-3">Add to card</a>
                     </form>
+=======
+            <div class="row bg-white g-2 mb-2">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <div class="d-flex justify-content-center align-items-center img-prdDetail">
+                        <img id="image" src="{{asset('assets/image/'. $prd->image)}}" height="350px" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6 col-12">
+                    <div class="d-flex flex-column gap-4 h-100 p-4">
+                        <h3 hidden id="id">{{$prd->id}}</h3>
+                        <h3 class="fw-bold" id="name">{{$prd->name}}</h3>
+                        <div class="fw-normal fs-4" id="price">{{$prd->price}}$</div>
+                        <!-- <div class="card-text ">{{$prd->description}}</div> -->
+                        <div class="inp-color d-flex flex-row flex-wrap gap-2">
+                            <span class="fw-normal fs-4">COLOR:</span>
+                            <ul class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                                <li class="">RED</li>
+                                <li class="">BLUE</li>
+                                <li class="">GREEN</li>
+                                <li class="">YELLOW</li>
+                                <li class="">BLACK</li>
+                            </ul>
+                        </div>
+                        <div class="inp-size d-flex flex-row flex-wrap gap-2">
+                            <span class="fw-normal fs-4">SIZE:</span>
+                            <ul class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                                <li class="">S</li>
+                                <li class="">M</li>
+                                <li class="">L</li>
+                                <li class="">XL</li>
+                                <li class="">XXL</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a type="submit" id="addToCart" class="btn btn-secondary w-50">Add to card</a>
+                        </div>
+                    </div>
+>>>>>>> Stashed changes
                 </div>
             </div>
+            
         </div>
     </div>
 </main>
