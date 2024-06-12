@@ -17,18 +17,17 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     public function addnew()
-    {   
+    {
         $user = auth()->user();
         $name = $user->name;
         $category = Category::all();
         $data = compact('name', 'category');
-        
+
         return view('admin.products.addnew', $data);
     }
 
     public function storeProduct(StoreProductRequest $request)
     {
-
         DB::beginTransaction();
 
         try {
@@ -44,12 +43,14 @@ class ProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $path = $image->store('images', 'public');
+                    $imageName = $image->getClientOriginalName();
+                    $image->move(public_path('assets/images'), $imageName);
+                    $imageUrl = asset('images/' . $imageName); 
                     ProductImage::create([
-                        'path' => $path,
+                        'path' => $imageUrl, 
                         'product_id' => $product->id,
                     ]);
-                    Log::info('Image uploaded', ['path' => $path, 'product_id' => $product->id]);
+                    Log::info('Image uploaded', ['path' => $imageUrl, 'product_id' => $product->id]);
                 }
             }
 
@@ -67,35 +68,50 @@ class ProductController extends Controller
                 'combinations' => $combinations,
             ]);
 
+            // Create or get existing variants
+            $variants = [];
+            foreach ($variantNames as $variantName) {
+                $variants[$variantName] = Variant::firstOrCreate(['name' => $variantName]);
+
+                Log::info('Variant created/selected', ['variant' => $variantName]);
+            }
+
             foreach ($combinations as $index => $combination) {
                 $combinationParts = explode(', ', $combination);
                 $variantOptions = [];
-
+    
                 foreach ($combinationParts as $part) {
-                    $variant = Variant::firstOrCreate(['name' => $part]);
-
-                    Log::info('Variant processed', ['variant' => $variant->name]);
-                    $variantOption = VariantOption::create([
-                        'name' => $part,
-                        'variant_id' => $variant->id, // Assign the variant_id
+                    $explodedPart = explode(': ', $part);
+                    
+                    if (count($explodedPart) != 2) {
+                        Log::error('Invalid combination part', ['part' => $part]);
+                        continue;
+                    }
+    
+                    list($variantName, $optionName) = $explodedPart;
+    
+                    $variant = $variants[$variantName];
+                    $variantOption = VariantOption::firstOrCreate([
+                        'name' => $optionName,
+                        'variant_id' => $variant->id,
                     ]);
-
+    
                     $variantOptions[] = $variantOption;
-                    Log::info('Variant option processed', ['variantOption' => $variantOption->name]);
+                    Log::info('Variant option created/selected', ['variantOption' => $optionName]);
                 }
-
+    
                 $productVariant = ProductVariant::create([
                     'product_id' => $product->id,
                     'quantity' => $quantities[$index],
                     'price' => $prices[$index],
                 ]);
-
+    
                 Log::info('Product variant created', [
                     'product_id' => $product->id,
                     'quantity' => $quantities[$index],
                     'price' => $prices[$index],
                 ]);
-
+    
                 foreach ($variantOptions as $variantOption) {
                     SubVariant::create([
                         'product_variant_id' => $productVariant->id,
@@ -107,30 +123,29 @@ class ProductController extends Controller
                     ]);
                 }
             }
-
+    
             DB::commit();
-
+    
             Log::info('Product added successfully', ['product_id' => $product->id]);
-
+    
             return redirect()->route('addnew.store')->with('success', 'Product added successfully.');
         } catch (\Exception $e) {
             DB::rollback();
-
+    
             Log::error('Error adding product', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-
+    
             return redirect()->back()->with('error', 'An error occurred while adding the product.');
         }
     }
-
     public function storeCategory(Request $request)
-    {   
+    {
 
         $category = new Category();
         $category->name = $request->category;
-        if(isset($request->parent_id)){
+        if (isset($request->parent_id)) {
             $category->parent_id = $request->parent_id;
         }
         $category->save();

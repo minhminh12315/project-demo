@@ -20,9 +20,8 @@ class HomeController extends Controller
     {
         $data = [
             'user' => auth()->user(),
-            'newPrd' => Product::with(['category', 'productVariants', 'productVariants.images'])->take(10)->get(),
+            'newPrd' => Product::with(['category', 'productVariants', 'productImages'])->orderBy('created_at', 'desc')->take(8)->get(),
             
-            'title' => 'Day la trang Homepage'
         ];
 
         return view('user.index', $data);

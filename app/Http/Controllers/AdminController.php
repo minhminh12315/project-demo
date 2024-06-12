@@ -16,6 +16,7 @@ use App\Models\ProductVariantImage;
 use App\Models\Size;
 use App\Models\SubCategory;
 use App\Models\User;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,12 +24,14 @@ class AdminController extends Controller
     public function index()
     {
         $data = [
-            'lstPrd' => Product::with(['category', 'productVariants', 'productVariants.images'])->get(),
-            'name' => auth()->user()->name
+            'name' => auth()->user()->name,
+            'products' => Product::with(['category', 'images', 'productVariants.subVariants.variantOption.variant'])->get(),
+            'variants' => Variant::all(),
         ];
 
         return view('admin.index', $data);
     }
+
     public function login()
     {
         return view('layouts.login');
