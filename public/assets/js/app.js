@@ -1,14 +1,11 @@
 var R = {
     init: function () {
         R.registerEvents();
-<<<<<<< Updated upstream
-=======
         R.displayCart();
         R.displayCartCheckOut();
         R.displayCartCount();
         R.navbarStick();
         R.collapseToggle();
->>>>>>> Stashed changes
     },
     registerEvents: function () {
         $("input[name='name']").change(function () {
@@ -131,7 +128,6 @@ var R = {
                     result.push(prefix);
                     return;
                 }
-<<<<<<< Updated upstream
                 let variant = variants[0];
                 let rest = variants.slice(1);
                 variant.options.forEach(function (option) {
@@ -141,15 +137,6 @@ var R = {
             f([], variants);
             return result;
         }
-    },
-=======
-            } else {
-                cart.push(item);
-            }
-
-            localStorage.setItem("cart", JSON.stringify(cart));
-            R.displayCartCount();
-        });
         $("#clearCart").click(function () {
             localStorage.removeItem("cart");
             R.displayCartCount();
@@ -388,9 +375,5 @@ var R = {
             }
         });
     },
-    collapseToggle: function () {
-
-    },
->>>>>>> Stashed changes
 };
 R.init();
